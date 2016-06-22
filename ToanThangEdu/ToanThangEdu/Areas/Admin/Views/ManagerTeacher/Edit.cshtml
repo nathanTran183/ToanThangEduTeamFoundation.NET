@@ -1,0 +1,189 @@
+﻿@using ToanThangEdu.Areas.Admin.Models;
+@{
+    ViewBag.Title = "THAY ĐỔI THÔNG TIN";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var check = ViewBag.IsRegisterTeacher;
+    var teacher = (TeacherCustomizeModel)ViewBag.Teacher;
+}
+
+@using (Html.BeginForm("Edit", "ManagerTeacher", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("Id", teacher.Id)
+    if (check == true)
+    {
+        <div class="container form-horizontal">
+            <div class="row">
+
+                <div class="col-lg-10">
+                    <div class="widget-item">
+                        
+
+                        <div class="form-horizontal">
+                            <h4>CHỈNH SỬA THÔNG TIN GIÁO VIÊN</h4>
+                            <hr />
+                           @Html.ValidationSummary(true)
+
+                            <div class="form-group">
+                                @Html.Label("Họ và tên:", new { @class = "col-lg-3 control-label" })
+                                <div class="col-lg-8">                                   
+                                    <h5 name="FullName" >@teacher.FullName</h5>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Giới tính:", new { @class = "col-md-3 control-label" })
+                                <div class="col-md-8">
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-default" id="g1">
+                                            <input type="radio" name="Gender" value="1" checked="checked" /> Nam
+                                        </label>
+                                        <label class="btn btn-default" id="g2">
+                                            <input type="radio" name="Gender" value="0" /> Nữ
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Số điện thoại:", new { @class = "col-lg-3 control-label" })
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" name="PhoneNumber" value="@teacher.PhoneNumber" required aria-describedby="basic-addon1" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Phạm vi dạy:", new { @class = "col-lg-3 control-label" })
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" name="TeachArea" value="@teacher.TeachArea" required aria-describedby="basic-addon1" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Nội dung dạy:", new { @class = "col-lg-3 control-label" })
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" name="TeachContent" value="@teacher.TeachContent" required aria-describedby="basic-addon1" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Trình độ dạy:", new { @class = "col-lg-3 control-label" })
+                                <div class="col-lg-8">
+                                    <input type="number" class="form-control" name="TeachLevel" value="@teacher.TeachLevel" required aria-describedby="basic-addon1" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Trình độ dạy:", new { @class = "col-lg-3 control-label" })
+                                <div class="col-lg-8">
+                                    <input type="number" class="form-control" name="Tuition" value="@teacher.Tuition" required aria-describedby="basic-addon1" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Năm sinh:", new { @class = "col-lg-3 control-label" })
+                                <div class="col-lg-8">
+                                    <input type="number" class="form-control" name="YearOfBirth" value="@teacher.YearOfBirth" required aria-describedby="basic-addon1" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Nội dung chi tiết:", new { @class = "col-lg-3 control-label" })
+                                <div class="col-lg-8">
+                                    @*<input type="text" class="form-control" name="MoreContent" value="@teacher.MoreContent" required aria-describedby="basic-addon1" />*@
+
+                                    @Html.TextArea("MoreContent", teacher.MoreContent)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-3 col-lg-9">
+                                    <input type="submit" value="Lưu thay đổi" class="btn btn-primary" />
+                                    @Html.ActionLink("Quay lại", "Index", "ManagerTeacher", null, new { @class = "btn btn-primary" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+    else
+    {
+        <div>
+            <br />
+            <h4 class="text-center">CHỈNH SỬA THÔNG TIN GIÁO VIÊN</h4>
+            <hr />
+          
+            <div class="container">
+                <div class="col-lg-4">
+                   
+                    <div class="prof-thumb">
+                        @if (teacher.ImageURL == null)
+                        {
+                            <img style="width: 300px; height: 300px" src="~/images/Teacher/No_Image_Available.png" alt="Profesor Name" />
+                        }
+                        else
+                        {
+                            <img style="width: 300px; height: 300px" src="~/images/Teacher/@teacher.ImageURL" alt="Profesor Name" />
+                        }
+                        
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            @Html.Label("Họ và tên:", new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" name="Name" value="@teacher.Name" required aria-describedby="basic-addon1" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Ảnh đại diện:", new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-9">
+                                <input type="file" name="fileUpload" class="btn btn-default form-control" />
+                                @ViewBag.ThongBao
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Học vị:", new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" name="TeacherType" value="@teacher.TeacherType" required aria-describedby="basic-addon1" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Mô tả:", new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-9">
+                                @Html.TextArea("Description", teacher.Description)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Chi tiết:", new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-9">
+                                @Html.TextArea("Detail", teacher.Detail)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-lg-9">
+                                <input type="submit" value="Lưu thay đổi" class="btn btn-primary" />
+                                @Html.ActionLink("Quay lại", "Index", "ManagerTeacher", null, new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+<script>
+    var data = @Model.Gender;
+    if (data == '1') {
+        var d = document.getElementById('g1');
+        d.className += " active";
+    } else {
+        var d = document.getElementById('g2');
+        d.className += " active";
+    }
+
+</script>
+    }
+}

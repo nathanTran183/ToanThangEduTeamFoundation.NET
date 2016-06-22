@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b499269583f7458f8acbb1ef46723acb" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="ToanThangEducationDBModel.AspNetRole" Width="1.5" PointX="2.75" PointY="6.375" />
+        <EntityTypeShape EntityType="ToanThangEducationDBModel.AspNetUserClaim" Width="1.5" PointX="7.25" PointY="5" />
+        <EntityTypeShape EntityType="ToanThangEducationDBModel.AspNetUserLogin" Width="1.5" PointX="7.25" PointY="7.75" />
+        <EntityTypeShape EntityType="ToanThangEducationDBModel.AspNetUser" Width="1.5" PointX="5" PointY="5.25" />
+        <EntityTypeShape EntityType="ToanThangEducationDBModel.Class" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="ToanThangEducationDBModel.DocumentItem" Width="1.5" PointX="12" PointY="4.875" />
+        <EntityTypeShape EntityType="ToanThangEducationDBModel.DocumentsCategory" Width="1.5" PointX="9.75" PointY="5.125" />
+        <EntityTypeShape EntityType="ToanThangEducationDBModel.Menu" Width="1.5" PointX="7.75" PointY="1.375" />
+        <EntityTypeShape EntityType="ToanThangEducationDBModel.News" Width="1.5" PointX="12.25" PointY="1" />
+        <EntityTypeShape EntityType="ToanThangEducationDBModel.NewsCategory" Width="1.5" PointX="10" PointY="1.125" />
+        <EntityTypeShape EntityType="ToanThangEducationDBModel.Period" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="ToanThangEducationDBModel.RegisterStudier" Width="1.5" PointX="9.75" PointY="8.75" />
+        <EntityTypeShape EntityType="ToanThangEducationDBModel.RegisterTeacher" Width="1.5" PointX="2.75" PointY="10.75" />
+        <EntityTypeShape EntityType="ToanThangEducationDBModel.Setting" Width="1.5" PointX="4.75" PointY="10.75" />
+        <EntityTypeShape EntityType="ToanThangEducationDBModel.StudierInSchedule" Width="1.5" PointX="5.25" PointY="1.5" />
+        <EntityTypeShape EntityType="ToanThangEducationDBModel.Subject" Width="1.5" PointX="0.75" PointY="7.125" />
+        <EntityTypeShape EntityType="ToanThangEducationDBModel.SubjectSchedule" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="ToanThangEducationDBModel.Teacher" Width="1.5" PointX="0.75" PointY="1.25" />
+        <EntityTypeShape EntityType="ToanThangEducationDBModel.User" Width="1.5" PointX="6.75" PointY="10.75" />
+        <AssociationConnector Association="ToanThangEducationDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="ToanThangEducationDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="ToanThangEducationDBModel.FK_SubjectSchedule_Class" />
+        <AssociationConnector Association="ToanThangEducationDBModel.FK_DocumentItems_DocumentsCategories" />
+        <AssociationConnector Association="ToanThangEducationDBModel.FK_NewsCategories_Menus" />
+        <AssociationConnector Association="ToanThangEducationDBModel.FK_News_NewsCategories" />
+        <AssociationConnector Association="ToanThangEducationDBModel.FK_StudierInSchedule_SubjectSchedule" />
+        <AssociationConnector Association="ToanThangEducationDBModel.FK_SubjectSchedule_Subject" />
+        <AssociationConnector Association="ToanThangEducationDBModel.FK_SubjectSchedule_Teachers" />
+        <AssociationConnector Association="ToanThangEducationDBModel.AspNetUserRoles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

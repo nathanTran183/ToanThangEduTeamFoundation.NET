@@ -1,0 +1,52 @@
+﻿@model ToanThangEdu.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "XÁC NHẬN XÓA";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container form-horizontal">
+    <div class="row">
+
+        <div class="widget-item">
+            <div class="col-lg-10">
+
+                <h4 class="prof-name-list text-center">BẠN CÓ MUỐN XÓA TÀI KHOẢN NÀY?</h4>
+                <hr />
+                <div class="col-lg-2"></div>
+                <div class="col-lg-10">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayName("Tên đăng nhập: ")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.UserName)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayName("Email:")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Email)
+                        </dd>
+
+                    </dl>
+                    </div>
+                    @using (Html.BeginForm())
+                      {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group">
+                            <div class="col-md-offset-4 col-lg-8">
+                                <input type="submit" value="Xóa" class="btn btn-danger" />
+                                @Html.ActionLink("Quay lại", "Index", "ManagerTeacher", null, new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>

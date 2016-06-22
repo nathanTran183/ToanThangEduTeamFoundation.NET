@@ -1,0 +1,94 @@
+﻿
+
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/Admin/Index">Trung Tâm Toàn Thắng v2.0</a>
+
+
+    </div>
+    <!-- /.navbar-header -->
+
+
+    <ul class="nav navbar-top-links navbar-right">
+
+        <!-- /.dropdown -->
+        <!-- /.dropdown -->
+        <!-- /.dropdown -->
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                @*<li>
+                        <a href="/Manage"><i class="fa fa-user fa-fw"></i> Settings</a>
+                    </li>*@
+                <li>
+                    <a href="/Manage"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
+                    }
+                </li>
+            </ul>
+            <!-- /.dropdown-user -->
+        </li>
+        <!-- /.dropdown -->
+    </ul>
+    <!-- /.navbar-top-links -->
+
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="sidebar-search">
+                </li>
+                <li >
+                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Quản lý Site<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse in" style="">
+                        <li>
+                            @Html.ActionLink("Tin tức", "Index", "News")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Chia sẻ tài liệu", "Index", "DocumentItems")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Loại tài liệu", "Index", "DocumentsCategories")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Lịch học", "Index", "Periods")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Upload Ảnh", "Index", "OurSlider")
+                        </li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Quản lý hệ thống<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse in" style="">
+                        <li>
+                            @Html.ActionLink("Giáo viên trung tâm", "Index", "Teachers")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Danh sách gia sư", "Index", "RegisterTeachers")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Tìm gia sư", "Index", "ManagerStudent")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Xác nhận tài khoản", "Index", "ConfirmAccount")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Người dùng", "Index", "User")
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
+    </div>
+    <!-- /.navbar-static-side -->
+</nav>

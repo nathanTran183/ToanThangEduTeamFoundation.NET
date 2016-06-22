@@ -1,0 +1,77 @@
+﻿@model ToanThangEdu.Models.DocumentItem
+
+@{
+    ViewBag.Title = "CHỈNH SỬA TÀI LIỆU";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("Edit", "DocumentItems", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container form-horizontal">
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="widget-item">
+                    <div class="form-horizontal">
+                        <h4 class="text-center">CHỈNH SỬA TÀI LIỆU</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Id)
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, "Tên tài liệu", htmlAttributes: new { @class = "control-label col-lg-3" })
+                            <div class="col-lg-9">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CategoryId, "Thể loại", htmlAttributes: new { @class = "control-label col-lg-3" })
+                            <div class="col-lg-9">
+                                @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Nội dung sơ lược: ", "Nội dung sơ lược", htmlAttributes: new { @class = "control-label col-lg-3" })
+                            <div class="col-lg-9">
+                                @Html.EditorFor(model => model.DocumentContent, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DocumentContent, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+                            @Html.Label("Nội dung file", htmlAttributes: new { @class = "control-label col-lg-3" })
+                            <div class="col-lg-9">
+                                @Html.EditorFor(model => model.DocumentURL, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DocumentURL, "", new { @class = "text-danger" })
+                                <iframe src="https://docs.google.com/gview?url=http://www.tutorialspoint.com/cprogramming/cprogramming_tutorial.pdf&embedded=true" style="width:600px; height:500px;" frameborder="0"></iframe>
+                            </div>
+                        </div>*@
+                
+                        <div class="form-group">
+                            @Html.Label("File đính kèm:", new { @class = "control-label col-lg-3" })
+                            <div class="col-lg-8">
+                                <input type="file" name="fileUpload" class="btn btn-default form-control" />
+                                <h5 style="color:red">@ViewBag.ThongBao</h5>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-lg-9">
+                                @Html.ActionLink("Xem nội dung file", "DisplayPDF", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" })
+                                <input type="submit" value="Lưu thay đổi" class="btn btn-primary" />
+                                @Html.ActionLink("Quay lại", "Index", "DocumentItems", null, new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@

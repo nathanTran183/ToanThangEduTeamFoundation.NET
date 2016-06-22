@@ -1,0 +1,222 @@
+﻿@using ToanThangEdu.Models
+@using ToanThangEdu.Areas.Admin.Controllers
+@{
+    ToanThangEducationDBEntities db = new ToanThangEducationDBEntities();
+    var listMenu = new List<MenuInView>();
+    var listRootId = new List<Int64>();
+    foreach (var item in db.DocumentsCategories.OrderBy(x => x.Id))
+    {
+        if (item.RootId == 0 || item.RootId == null)
+        {
+            var tmp = Convert.ToInt64(item.Id);
+            listRootId.Add(tmp);
+        }
+    }
+    foreach (var item in listRootId)
+    {
+        MenuInView tmp = new MenuInView();
+        tmp.Id = item;
+        var listTmp = db.DocumentsCategories.Where(x => x.RootId == item).ToList();
+        var rootName = db.DocumentsCategories.Where(x => x.Id == item).FirstOrDefault();
+        if (rootName == null)
+        {
+            tmp.PaMenu = "Root đã được xóa";
+        }
+        else
+        {
+            tmp.PaMenu = rootName.Name;
+        }
+
+        List<MenuChild> listChild = new List<MenuChild>();
+        foreach (var itemChild in listTmp)
+        {
+            MenuChild menuTmp = new MenuChild();
+            var dcTmp = db.DocumentsCategories.Where(x => x.Id == itemChild.Id).FirstOrDefault();
+            menuTmp.Id = dcTmp.Id;
+            menuTmp.ChiMenu = dcTmp.Name;
+            listChild.Add(menuTmp);
+        }
+        tmp.ChiMenu = listChild;
+        listMenu.Add(tmp);
+    }
+
+}
+<div class="responsive-navigation visible-sm visible-xs">
+    <a href="#" class="menu-toggle-btn">
+        <i class="fa fa-bars"></i>
+    </a>
+    <div class="responsive_menu">
+        <ul class="main_menu">
+            <li><a href=@Url.Action("Index","Home")>Trang chủ</a></li>
+            <li>
+                <a href="@Url.Action("Index","UserNews")">Tin tức & Thông báo</a>
+                <ul class="sub-menu">
+                    <li><a href="@Url.Action("Index","UserNews", new { id = 4})">Thông báo</a></li>
+                    <li><a href="@Url.Action("Index","UserNews",new { id = 5})">Hoạt động - Sự kiện</a></li>
+                    <li><a href="@Url.Action("Index","UserNews",new { id = 6})">Thi và Tuyển sinh</a></li>
+                    <li><a href="@Url.Action("Index","UserNews",new { id = 7})">Tin tức giáo dục</a></li>
+                </ul>
+
+            </li>
+            <li>
+                <a href="@Url.Action("Index","UserPeriods")">Lịch học</a>
+                @*<ul class="sub-menu">
+                        <li><a href="./courses.html">Sáng</a></li>
+                        <li><a href="./course-single.html">Chiểu</a></li>
+                        <li><a href="./course-single.html">Tối</a></li>
+                    </ul>*@
+            </li>
+            <li>
+                <a href="@Url.Action("Program","UserNews")">Đào tạo</a>
+                <ul class="sub-menu">
+                    <li><a href="@Url.Action("Program","UserNews",new { id = 8})">Nội quy - Quy Chế</a></li>
+                    <li><a href="@Url.Action("Program","UserNews",new { id = 9})">Kết quả kì thi</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="@Url.Action("About","UserNews")">Giới thiệu</a>
+                <ul class="sub-menu">
+                    <li><a href="@Url.Action("About","UserNews",new { id = 1})">Giới thiệu về trung tâm</a></li>
+                    <li><a href="@Url.Action("About","UserNews",new { id = 2})">Thành tích học sinh</a></li>
+                    <li><a href="@Url.Action("About","UserNews",new { id = 3})">Thành tích nhà trường</a></li>
+                </ul>
+            </li>
+            @*<li><a href="./contact.html">Xếp lớp</a></li>*@
+            <li>
+                <a href="@Url.Action("Index","UserDocumentItems")">Tài liệu tham khảo</a>
+                <ul class="sub-menu">
+                    @{
+                        foreach (var item in listMenu)
+                        {
+                            <li>
+                                <a href="@Url.Action("Index","UserDocumentItems",new { id = item.Id})">@item.PaMenu</a>
+                                @if (item.ChiMenu.Count() >= 1)
+                                {
+                                    <ul class="sub-menu">
+                                        @foreach (var itemChild in item.ChiMenu)
+                                        {
+                                            <li><a href="@Url.Action("Index","UserDocumentItems",new { id = itemChild.Id})">@itemChild.ChiMenu</a></li>
+                                        }
+                                    </ul>
+                                }
+
+                            </li>
+                        }
+                    }
+                </ul>
+            </li>
+
+        </ul> <!-- /.main_menu -->
+        <ul class="social_icons">
+            <li><a href="https://www.facebook.com/daythemtoanthang"><i class="fa fa-facebook" target="_blank"></i></a></li>
+        </ul> <!-- /.social_icons -->
+    </div> <!-- /.responsive_menu -->
+</div> <!-- /responsive_navigation -->
+
+
+<header class="site-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 header-left">
+                <p><i class="fa fa-phone"></i> (+84)905-320-920</p>
+                <p><i class="fa fa-envelope"></i> <a href="mailto:huymanhnguyen@gmail.com">huymanhnguyen@gmail.com</a></p>
+            </div> <!-- /.header-left -->
+
+            <div class="col-md-4">
+                <div class="logo">
+                    <a href=@Url.Action("Index","Home") title="Trung tâm Toàn Thắng" rel="Trang Chủ">
+                        <img style="width: 350px; height: 140px" src="~/Content/images/TT-logo.png" alt="Trung Tâm Toàn Thắng" />
+                    </a>
+                </div> <!-- /.logo -->
+            </div> <!-- /.col-md-4 -->
+
+            <div class="col-md-4 header-right">
+                <ul>
+                    <li class="btn btn-default"><a class="text-color" href="@Url.Action("DangKiTimGiaSu","DangKiTimGiaSu")">Tìm gia sư</a></li>
+                    <li class="btn btn-default"><a class="text-color" href="@Url.Action("DangKiLamGiaSu","DangKiTimGiaSu")">Làm gia sư</a></li>                    
+                </ul>
+                <div class="nav navbar-nav navbar-right">
+                    @Html.Partial("_LoginPartial")
+
+                </div>
+            </div> <!-- /.header-right -->
+        </div>
+    </div> <!-- /.container -->
+
+    <div class="nav-bar-main" role="navigation">
+        <div class="container">
+            <nav class="main-navigation clearfix visible-md visible-lg" role="navigation">
+                <ul class="main-menu sf-menu">
+                    <li><a href=@Url.Action("Index","Home")>Trang chủ</a></li>
+                    <li>
+                        <a href="@Url.Action("Index","UserNews")">Tin tức & Thông báo</a>
+                        <ul class="sub-menu">
+                            <li><a href="@Url.Action("Index","UserNews", new { id = 4})">Thông báo</a></li>
+                            <li><a href="@Url.Action("Index","UserNews",new { id = 5})">Hoạt động - Sự kiện</a></li>
+                            <li><a href="@Url.Action("Index","UserNews",new { id = 6})">Thi và Tuyển sinh</a></li>
+                            <li><a href="@Url.Action("Index","UserNews",new { id = 7})">Tin tức giáo dục</a></li>
+                        </ul>
+
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","UserPeriods")">Lịch học</a>
+                        @*<ul class="sub-menu">
+                                <li><a href="./courses.html">Sáng</a></li>
+                                <li><a href="./course-single.html">Chiểu</a></li>
+                                <li><a href="./course-single.html">Tối</a></li>
+                            </ul>*@
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Program","UserNews")">Đào tạo</a>
+                        <ul class="sub-menu">
+                            <li><a href="@Url.Action("Program","UserNews",new { id = 8})">Nội quy - Quy Chế</a></li>
+                            <li><a href="@Url.Action("Program","UserNews",new { id = 9})">Kết quả kì thi</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("About","UserNews")">Giới thiệu</a>
+                        <ul class="sub-menu">
+                            <li><a href="@Url.Action("About","UserNews",new { id = 1})">Giới thiệu về trung tâm</a></li>
+                            <li><a href="@Url.Action("About","UserNews",new { id = 2})">Thành tích học sinh</a></li>
+                            <li><a href="@Url.Action("About","UserNews",new { id = 3})">Thành tích nhà trường</a></li>
+                        </ul>
+                    </li>
+                    @*<li><a href="./contact.html">Xếp lớp</a></li>*@
+                    <li>
+                        <a href="@Url.Action("Index","UserDocumentItems")">Tài liệu tham khảo</a>
+                        <ul class="sub-menu">
+                            @{
+                                foreach (var item in listMenu)
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Index","UserDocumentItems",new { id = item.Id})">@item.PaMenu</a>
+                                        @if (item.ChiMenu.Count() >= 1)
+                                        {
+                                            <ul class="sub-menu">
+                                                @foreach (var itemChild in item.ChiMenu)
+                                                {
+                                                    <li><a href="@Url.Action("Index","UserDocumentItems",new { id = itemChild.Id})">@itemChild.ChiMenu</a></li>
+                                                }
+                                            </ul>
+                                        }                                       
+
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </li>
+
+                </ul> <!-- /.main-menu -->
+
+                <ul class="social-icons pull-right">
+                    <li><a href="https://www.facebook.com/daythemtoanthang" data-toggle="tooltip" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                    @*<li><a href="#" data-toggle="tooltip" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#" data-toggle="tooltip" title="Pinterest"><i class="fa fa-pinterest"></i></a></li>
+                    <li><a href="#" data-toggle="tooltip" title="Google+"><i class="fa fa-google-plus"></i></a></li>
+                    <li><a href="#" data-toggle="tooltip" title="RSS"><i class="fa fa-rss"></i></a></li>*@
+                </ul> <!-- /.social-icons -->
+            </nav> <!-- /.main-navigation -->
+        </div> <!-- /.container -->
+    </div> <!-- /.nav-bar-main -->
+
+</header>

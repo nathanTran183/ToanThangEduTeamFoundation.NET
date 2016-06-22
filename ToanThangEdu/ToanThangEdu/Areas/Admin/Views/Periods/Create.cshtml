@@ -1,0 +1,90 @@
+﻿@model ToanThangEdu.Models.Period
+
+@{
+    ViewBag.Title = "TẠO MỚI NỘI DUNG LỊCH HỌC";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("Create", "Periods", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container form-horizontal">
+        <div class="row">
+
+            <div class="col-lg-10">
+                <div class="widget-item">
+
+
+                    <div class="form-horizontal">
+                        <h4 class="text-center">TẠO MỚI NỘI DUNG LỊCH HỌC</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        @*<div class="form-group">
+                            @Html.Label("Buổi:", htmlAttributes: new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-8">
+                                @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+
+                        @*<div class="form-group">
+                            @Html.Label("Buổi:", htmlAttributes: new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-8">
+                                @Html.DropDownListFor(model => model.Time, new SelectList(new List<Object> { new { value = "Sáng", text = "Sáng" }, new { value = "Chiều", text = "Chiều" }, new { value = "Tối", text = "Tối" }}, "value", "text"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+                        <div class="form-group">
+                            @Html.Label("Giáo viên:", htmlAttributes: new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-8">
+                                @Html.DropDownList("Time",new SelectList(ViewBag.teacher,"Name","Name"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Thứ:", htmlAttributes: new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-8">
+                                @Html.DropDownListFor(model => model.DayOfWeek, new SelectList(new List<Object> { new { value = "Thứ Hai", text = "Thứ Hai" },
+                                new { value = "Thứ Ba", text = "Thứ Ba" }, new { value = "Thứ Tư", text = "Thứ Tư" }, new { value = "Thứ Năm", text = "Thứ Năm" },
+                                new { value = "Thứ Sáu", text = "Thứ Sáu" }, new { value = "Thứ Bảy", text = "Thứ Bảy" }}, "value", "text"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DayOfWeek, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.Label("Khoảng thời gian:", htmlAttributes: new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-8">
+                                @Html.EditorFor(model => model.DistanceOfTime, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DistanceOfTime, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Các lớp học:", htmlAttributes: new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-8">
+                                @Html.EditorFor(model => model.Subjects, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Subjects, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-lg-9">
+                                <input type="submit" value="Tạo mới" class="btn btn-primary" />
+                                @Html.ActionLink("Quay lại", "Index", "Periods", null, new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+

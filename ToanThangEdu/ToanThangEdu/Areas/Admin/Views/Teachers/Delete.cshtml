@@ -1,0 +1,98 @@
+﻿@model ToanThangEdu.Models.Teacher
+
+@{
+    ViewBag.Title = "XÁC NHẬN XÓA";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container form-horizontal">
+    <div class="row">
+
+        <div class="widget-item">
+
+            @using (Html.BeginForm("Delete", "Teachers", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("Id", Model.Id)
+                <h4 class="prof-name-list text-center">BẠN CÓ MUỐN XÓA GIÁO VIÊN NÀY?</h4>
+                    <hr />
+                        <div class="container">
+                            <div class="col-lg-5">
+                                <div class="prof-thumb">
+                                    @if (Model.ImageURL == null)
+                                    {
+                                        <img style="width: 300px; height: 300px" src="~/images/Teacher/No_Image_Available.png" alt="Profesor Name" />
+                                    }
+                                    else
+                                    {
+                                        <img style="width: 300px; height: 300px" src="~/images/Teacher/@Model.ImageURL" alt="Profesor Name" />
+                                    }
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-7">
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        @Html.DisplayName("Tên giáo viên:")
+                                    </dt>
+
+                                    <dd>
+                                        @Model.Name
+                                    </dd>
+
+                                    @*<dt>
+                                            @Html.DisplayName("Ảnh đại diện:")
+                                        </dt>
+
+                                        <dd>
+                                            <div class="prof-thumb">
+                                                <img style="width: 40px; height: 40px" src="~/images/Teacher/@teacher.ImageURL" alt="Profesor Name" />
+                                            </div>
+                                        </dd>*@
+
+                                    <dt>
+                                        @Html.DisplayName("Học vị:")
+                                    </dt>
+
+                                    <dd>
+                                        @Model.TeacherType.ToString()
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayName("Mô tả:")
+                                    </dt>
+
+                                    <dd>
+                                        @Html.Raw(Model.Description)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayName("Mô tả chi tiết:")
+                                    </dt>
+
+                                    <dd>
+                                        @Html.Raw(Model.Detail)
+                                    </dd>
+
+                                </dl>
+                                <div class="form-group">
+                                    <div class="col-md-offset-3 col-lg-9">
+                                        <input type="submit" value="Xóa" class="btn btn-danger" />
+                                        @Html.ActionLink("Quay lại", "Index", "Teachers", null, new { @class = "btn btn-primary" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+            }
+        </div>
+
+    </div>
+
+</div>
+
+
+
+

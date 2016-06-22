@@ -1,0 +1,72 @@
+﻿@model ToanThangEdu.Models.Period
+
+@{
+    ViewBag.Title = "XÁC NHẬN XÓA";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container form-horizontal">
+    <h4 class="text-center">Bạn có muốn xóa dữ liệu này?</h4>
+    <hr />
+<div class="row">
+    
+    <div class="col-lg-3"></div>
+    <div class="col-lg-9">
+        <div class="widget-item">
+
+
+            <div class="form-horizontal">
+                
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayName("Giáo viên:")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Time)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayName("Khoảng thời gian:")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.DistanceOfTime)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayName("Thứ:")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.DayOfWeek)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayName("Các môn học:")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Subjects)
+                        </dd>
+
+                    </dl>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-lg-10">
+                                <input type="submit" value="Xóa" class="btn btn-danger" />
+                                @Html.ActionLink("Quay lại", "Index", "Periods", null, new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+﻿@model ToanThangEdu.Models.IndexViewModel
+@using ToanThangEdu.Models;
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Quản Lý Tài Khoản - Trung tâm Toàn Thắng";
+    Layout = "~/Views/Shared/_ToanThangLayout.cshtml";
+    var list = (List<Teacher>)ViewData["item"];
+    ToanThangEducationDBEntities db = new ToanThangEducationDBEntities();
+    string id = User.Identity.GetUserId();
+    var userFind = db.AspNetUsers.FirstOrDefault(x => x.Id == id);
+}
+
+
+
+
+<div class="container form-horizontal">
+    <div class="row">
+
+        <div class="col-md-8">
+            <div class="widget-item">
+                <h4 class="widget-title">Cài đặt tài khoản của bạn</h4>
+                <hr />
+                <dl class="dl-horizontal">
+
+                    <dt>Tên đăng nhập</dt>
+                    <dd>@User.Identity.GetUserName()</dd>
+                    <dt>Mật khẩu</dt>
+                    <dd>
+
+                        @if (Model.HasPassword)
+                        {
+                            @Html.ActionLink("Đổi mật khẩu", "ChangePassword")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Create", "SetPassword")
+                        }
+
+                    </dd>
+                    <dt>Email</dt>
+                    <dd>
+                        @userFind.Email
+                    </dd>
+                    @ViewBag.StatusMessage
+
+                </dl>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-4">
+            <div class="widget-main">
+                <div class="widget-main-title">
+                    <h4 class="widget-title">GIÁO VIÊN TRUNG TÂM</h4>
+                </div>
+                <div class="widget-inner">
+                    @foreach (var item in @list)
+                    {
+                        <div class="prof-list-item clearfix">
+                            <div class="prof-thumb">
+                                <img src="~/images/Teacher/@Html.DisplayFor(model => item.ImageURL)" alt="Profesor Name" />
+                            </div> <!-- /.prof-thumb -->
+                            <div class="prof-details">
+                                <h5 class="prof-name-list">@Html.DisplayFor(model => item.Name)</h5>
+                                <p class="small-text">@Html.Raw(@item.Description)</p>
+                            </div> <!-- /.prof-details -->
+                        </div> <!-- /.prof-list-item -->
+                    }
+                </div> <!-- /.widget-inner -->
+            </div> <!-- /.widget-main -->
+        </div> <!-- /.col-md-4 -->
+
+
+    </div>
+</div>

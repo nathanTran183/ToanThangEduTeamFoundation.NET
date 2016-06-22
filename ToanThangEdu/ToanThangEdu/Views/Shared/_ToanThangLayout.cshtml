@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en">
+</html><![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang="en">
+</html><![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9" lang="en"> </html><![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+ <!--<![endif]-->
+<head>
+    @*<title>Trung tâm Toàn Thắng</title>*@
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Trung tâm Toàn Thắng" />
+    <meta name="keywords" content="Trung tâm Toàn Thắng, Toàn Thắng, Trung tâm, daythem, dạy thêm, daykem, dạy kèm, day kem, day them, toan thang, trung tam toan thang, trung tam da nang, day them da nang, toan thang da nang, dạy thêm đà nẵng, dạy thêm toàn thắng, gia sư đà nẵng, gia sư toàn thắng, gia su toan thang, toan thang da nang, toàn thắng đà nẵng, dạy thêm học thêm, dạy thêm tại nhà, dạy kèm đà nẵng, day kem tai da nang, dạy kèm tại đà nẵng, dạy kèm gia sư, day kem o da nang, lop day kem, dạy kèm sinh viên gia sư, dạy kèm tại dn, day kem gia re, trung tâm dạy thêm, trung tam day them">
+    @*<meta charset="UTF-8" />*@
+
+    <script src="~/Content/js/jquery-1.11.3.min.js"></script>
+    <script src="~/Content/js/modernizr.js"></script>
+    <script src="~/Content/js/jssor.slider.min.js"></script>
+
+
+
+    <script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/plugins.js"></script>
+    <script src="~/Content/js/custom.js"></script>
+
+
+    <!-- CSS Bootstrap & Custom -->
+    <link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" />
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" media="screen" />
+    <link href="~/Content/css/animate.css" rel="stylesheet" media="screen" />
+
+    <link href="~/Content/style.css" rel="stylesheet" media="screen" />
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Content/images/ico/apple-touch-icon-144-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/Content/images/ico/apple-touch-icon-114-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Content/images/ico/apple-touch-icon-72-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" href="~/Content/images/ico/apple-touch-icon-57-precomposed.png" />
+    <link rel="shortcut icon" href="~/Content/images/ico/favicon.ico" />
+
+    <!-- JavaScripts -->
+    <!--[if lt IE 8]>
+    <div style=' clear: both; text-align:center; position: relative;'>
+            <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="../../../../storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" alt="" /></a>
+        </div>
+    <![endif]-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+
+</head>
+<body>
+    
+    <!-- This one in here is responsive menu for tablet and mobiles -->
+    <!--Begin header-->
+    @Html.Partial("_HeaderPartial")
+     <!-- /.site-header -->
+
+
+   <!--Bgein container-->
+        @RenderBody()
+    
+        <!--end container-->
+        <!-- begin The Footer -->
+        @Html.Partial("_FooterPartial")
+        <!-- /.site-footer -->   
+    <script lang="javascript">(function() {var pname = document.title;var ga = document.createElement('script'); ga.type = 'text/javascript';ga.src = '//live.vnpgroup.net/js/web_client_box.php?hash=6d194690eb6fc5c61006a5b7a6c873cb&data=eyJzc29faWQiOjY3NTIyOCwiaGFzaCI6ImMxZmMxYjg3MDAyNDgxMTllMDU4MDZkZjc5YjBhNTA5In0-&pname='+pname;var s = document.getElementsByTagName('script');s[0].parentNode.insertBefore(ga, s[0]);})();</script><noscript><a href="http://www.vatgia.com" title="vatgia.com" target="_blank">Tài trợ bởi vatgia.com</a></noscript><noscript><a href="http://vchat.vn" title="vchat.vn" target="_blank">Phát triển bởi vchat.vn</a></noscript><noscript><a href="http://123doc.org" title="123doc.org" target="_blank">Partner vchat.vn</a></noscript>
+</body>
+</html>

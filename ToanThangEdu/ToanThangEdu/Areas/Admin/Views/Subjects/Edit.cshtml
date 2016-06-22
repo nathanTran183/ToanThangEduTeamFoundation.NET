@@ -1,0 +1,43 @@
+﻿@model ToanThangEdu.Models.Subject
+
+@{
+    ViewBag.Title = "CHỈNH SỬA THÔNG TIN";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="container form-horizontal">
+        <div class="row">
+
+            <div class="col-lg-10">
+                <div class="widget-item">
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <h4 class="text-center">CHỈNH SỬA THÔNG TIN MÔN HỌC</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Id)
+
+                        <div class="form-group">
+                            @Html.Label("Tên môn học:", new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" name="SubjectName" value="@Model.Subject1" required aria-describedby="basic-addon1" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-lg-9">
+                                <input type="submit" value="Lưu thay đổi" class="btn btn-primary" />
+                                @Html.ActionLink("Quay lại", "Index", "Classes", null, new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}

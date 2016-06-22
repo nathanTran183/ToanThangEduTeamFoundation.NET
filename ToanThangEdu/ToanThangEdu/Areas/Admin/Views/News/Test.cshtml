@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ToanThangEdu.Models.News>
+
+@{
+    ViewBag.Title = "Test";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Test</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayName("Menu")
+        </th>
+        <th>
+            @Html.DisplayName("Category")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NewsDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatorName)
+        </th>
+    </tr>
+
+    @foreach (var list in Model.GroupBy(x => x.NewsCategory.Menu.Name))
+    {
+        var secondRowOrHigher = false;
+        @:<tr>
+            <td rowspan="@list.Count()">@list.Key</td>
+        foreach (var item in list.OrderBy(x => x.NewsCategory.Name).GroupBy(x => x.NewsCategory.Name))
+        {
+            if (secondRowOrHigher)
+            {
+                @:<tr>
+                    }
+            var subsecond = false;
+            <td rowspan="@item.Count()">@item.Key</td>
+            foreach (var subitem in item.OrderBy(x => x.Title))
+            {
+                if (subsecond)
+                {@:<tr>
+                 }
+                subsecond = true;
+                <td>
+                    @Html.DisplayFor(modelItem => subitem.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => subitem.NewsDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => subitem.ImageURL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => subitem.CreatorName)
+                </td>
+                @:</tr>
+            }
+            secondRowOrHigher = true;
+        
+        }
+    }
+
+</table>

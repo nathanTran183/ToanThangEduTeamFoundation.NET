@@ -1,0 +1,133 @@
+﻿@model ToanThangEdu.Models.RegisterTeacher
+
+@{
+    ViewBag.Title = "THAY ĐỔI THÔNG TIN GIA SƯ";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@*<script>
+    debugger
+    $(document).ready(function(){
+        $('textarea#MoreContent').val(@Model.MoreContent.ToString());
+        $('textarea#TeachContent').val(@Model.TeachContent.ToString());
+    });
+</script>*@
+
+@using (Html.BeginForm("Edit", "RegisterTeachers", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("Id", Model.Id)
+        <div class="container form-horizontal">
+            <div class="row">
+
+                <div class="col-lg-10">
+                    <div class="widget-item">
+
+
+                        <div class="form-horizontal">
+                            <h4 class="text-center">CHỈNH SỬA THÔNG TIN GIA SƯ</h4>
+                            <hr />
+                            @Html.ValidationSummary(true)
+
+                            <div class="form-group">
+                                @Html.Label("Họ và tên:", new { @class = "col-lg-3 control-label" })
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" name="FullName" value="@Model.Fullname" required aria-describedby="basic-addon1" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Email:", new { @class = "col-lg-3 control-label" })
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" name="Email" value="@Model.Email" required aria-describedby="basic-addon1" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Năm sinh:", new { @class = "col-lg-3 control-label" })
+                                <div class="col-lg-8">
+                                    <input type="number" class="form-control" name="YearOfBirth" value="@Model.YearOfBirth" required aria-describedby="basic-addon1" />
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                @Html.Label("Giới tính:", new { @class = "col-md-3 control-label" })
+                                <div class="col-md-8">
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-default" id="g1">
+                                            <input type="radio" name="Gender" value="1"/> Nam
+                                        </label>
+                                        <label class="btn btn-default"  id="g2">
+                                            <input type="radio" name="Gender" value="0" /> Nữ
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Số điện thoại:", new { @class = "col-lg-3 control-label" })
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" name="PhoneNumber" value="@Model.PhoneNumber" required aria-describedby="basic-addon1" />
+                                </div>
+                            </div>
+
+                            
+
+                            <div class="form-group">
+                                @Html.Label("Phạm vi dạy:", new { @class = "col-lg-3 control-label" })
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" name="TeachArea" value="@Model.TeachArea" required aria-describedby="basic-addon1" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Mức phí:", new { @class = "col-lg-3 control-label" })
+                                <div class="col-lg-8">
+                                    <input type="number" class="form-control" name="Tuition" value="@Model.Tuition" required aria-describedby="basic-addon1" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Nội dung dạy:", new { @class = "col-lg-3 control-label" })
+                                <div class="col-lg-8">
+                                    <textarea cols="100%" rows="5" id="TeachContent" required class="form-control" name="TeachContent" aria-describedby="basic-addon1">@Model.TeachContent</textarea>
+                                </div>
+                            </div>
+
+                           
+                            <div class="form-group">
+                                @Html.Label("Nội dung chi tiết:", new { @class = "col-lg-3 control-label" })
+                                <div class="col-lg-8">
+                                    <textarea cols="100%" rows="5" id="MoreContent" required class="form-control" name="MoreContent"  aria-describedby="basic-addon1">@Model.MoreContent</textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-md-offset-3 col-lg-9">
+                                    <input type="submit" value="Lưu thay đổi" class="btn btn-primary" />
+                                    @Html.ActionLink("Quay lại", "Index", "RegisterTeachers", null, new { @class = "btn btn-primary" })
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+<script>
+    var data = @Model.Gender;
+    if (data == '1') {
+        var d = document.getElementById('g1');
+        d.className += " active";
+    } else {
+        var d = document.getElementById('g2');
+        d.className += " active";
+    }
+    
+</script>
+}
+
+

@@ -1,0 +1,298 @@
+﻿#page4 .column-1.item-related{
+    margin-right: 0; margin-bottom: 20px;
+}
+
+#MenuTrang{
+    float:right;
+    margin: 0px auto;
+}
+
+#MenuTrang .li {
+    display:inline;
+}
+
+#page4 .img-indent img{
+   
+    height:88px;
+    width:88px;
+}
+
+#page4 .h img{
+    height: 166px;
+    width: 200px;
+}
+.item-related .extra-wrap { height: 90px}
+.extra-wrap{
+    height:166px;
+    margin-right: 8px;
+}
+
+.wrapper p3 {
+    margin-top:10px;
+}
+
+.extra-wrap a{
+    text-decoration:none;
+}
+.extra-wrap a:hover{ 
+    color:darkblue;
+} 
+
+.readmore {
+    width:600px;
+    float:left;
+    margin-top : 10px;
+}
+
+.readmore img{
+    height:200px;
+    width:200px;
+    float:left;
+    margin-top:10px;
+}
+
+.readmore header{
+    font:bold 30px caption; 
+    color: red;
+    text-align:center;
+}
+.nguyenlieu {
+    
+}
+.readmore h3 {
+    font:bold 30px italic;
+    color:chocolate;
+}
+#Commment {
+    
+}
+
+#Commment textarea{
+    margin-top:10px;
+    height: 60px;
+    width: 580px;
+    margin-left: 7px;
+} 
+#Commment form{
+border: solid #e9e9e9;
+border-width: 1px 0;
+}
+#Commment button{
+    margin-left: 7px; 
+
+}
+/*#Commment input {
+    float:right;
+    margin-right: 10px;
+    height:40px;
+    width:80px;
+    font:bold 12px initial;
+    color:red;
+}*/
+.tit {
+    height:25px;
+    width:150px;
+    background-color:red;
+    color:white;
+    text-align:center;
+    margin-bottom:5px;
+    font-size: 20px;
+}
+.nauan {
+    float:left;
+    margin-top:30px;
+}
+
+.postname {
+    color:#3b5998;
+    font-size:12px;
+    font-weight:bold;
+    margin:0 auto;
+}
+
+
+.postcontent {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+.post {
+    border-bottom: 1px solid white;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+.listComment {
+   width:580px;
+}
+
+#txtTimKiem {
+    font-size:0px;
+    margin-left: 300px;
+width: 400px;
+margin-top: 23px;
+}
+#txtTimKiem input{
+    border-radius: 4px 0 0 4px;
+    height: 30px;
+width: 250px;
+display: inline-block;
+margin: 0;
+}
+#txtTimKiem select {
+    height: 30px;
+width: 70px;
+padding: 6px 0;
+display: inline-block;
+margin: 0;
+border-radius: 0px;
+border-left: 0;
+border-right: 0;
+}
+#txtTimKiem button{height: 30px;border-radius: 0 4px 4px 0;}
+#divHinhAnhTimKiem button {
+    margin-right:-65px;
+    padding:0 10px 0 10px;
+    background-color:#426db5;
+}
+#divHinhAnhTimKiem button:hover {
+    
+    background-color:rgba(0,0,0,.5);
+
+}
+#divHinhAnhTimKiem img {
+    width:30px;
+    height:30px;
+
+}
+.extra-wrap.Feedback{ height: auto}
+.contest {
+    float:left;
+    margin-top:10px;
+    width:600px;
+}
+.posttip{
+    float:left;
+    margin-top:10px;
+    width:600px;
+    margin-left:10px;
+}
+
+.titleTip {
+    
+    margin:5px;
+    width:600px;
+}
+
+.titleTip p{
+    font:bold 25px italic;
+    
+}
+
+.titleTip i{
+    float:left;
+}
+.addtip {
+    float:left;
+    height:20px;
+    background-color:red;
+    width:80px;
+    text-align:center;
+}
+.addtip a{
+    color:white;
+    text-decoration:none;
+}
+
+#tuandvp .column-1.item-related{
+    width:880px;
+    border-bottom:1px solid #d66901;
+}
+
+#tuandvp h5{
+    font:bold 40px;
+    color:red;
+}
+#Feedback {
+    float:left;
+    width:240px;
+    margin: 4px 4px 4px 4px;
+    border:1px solid blue;
+}
+
+#Feedback form input{
+    width:230px;
+    margin-left:3px;
+    margin-top:5px;
+}
+
+#Feedback form textarea{
+    width:230px;
+    margin-top:5px;
+    margin:3px;
+}
+
+#Feedback form button{
+    margin-top:5px;
+    margin-left: 154px;
+    margin-bottom:5px;
+}
+
+#Feedback i{
+    margin-left:45px;
+}
+.col-2 .img-indent-bot h5{ font-size: 14px; font-weight: bold; margin-bottom: 10px}
+.titleLeft h5 {
+    display: inline-block;
+line-height: 1em;
+font-size: 20px; font-weight: bold;
+color: #d66901;
+}
+.extra-wrap h5{ font-weight: bold; font-size: 12px}
+#MenuTrang .pagination{ padding: 0px}
+#MenuTrang .pagination li a{ border: none; background-image: none; background-color: #dfdfdf; border-radius: 50%; vertical-align: middle;line-height: 24px;}
+#MenuTrang .pagination li.active a{ background-color: #ca4b00}
+.bg{ overflow: hidden}
+.img-indent-bot .img-indent-right {
+    float: left;
+width: 130px;
+}
+
+.sidebar-search #txtTimKiem {
+
+    display:inline;
+}
+
+.sidebar-search .TextBoxTSearchimKiem{
+    width:100px;
+}
+
+.sidebar-search select{
+    width:30px;
+}
+
+.sidebar-search #txtTimKiem button{
+    width:10px;
+}
+.manageProfile
+{
+    opacity: 0.9;
+}
+.manageProfile .col-md-4 ul{ padding-left: 20px}
+#content{ overflow: hidden}
+
+.EnterName {
+    float:left;
+}
+.EnterName p{
+    margin-bottom:0px;
+    margin-left:8px;
+    float:left;
+    color:red;
+font-weight:bold;
+        font-size:15px;
+}
+.Enter {
+float:left;
+    margin:8px;
+    margin-top:0px;
+}

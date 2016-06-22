@@ -1,0 +1,58 @@
+﻿@model ToanThangEdu.Models.News
+
+@{
+    ViewBag.Title = "TIN TỨC CHI TIẾT";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container form-horizontal">
+    <div class="row">
+
+        <div class="col-lg-12">
+            <div class="widget-item">
+
+
+                <div class="form-horizontal">
+                    <h4 class="text-center">NỘI DUNG TIN TỨC</h4>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="blog-post-container">
+                                <div class="blog-post-image">
+                                    <img style="width:740px; height:390px" src="~/images/News/@Model.ImageURL" width="500" alt="" />
+                                    
+                                    <div class="blog-post-meta">
+                                    <br />
+                                        <ul>
+                                            <li><i class="fa fa-calendar-o"></i>@Html.DisplayFor(model => model.NewsDate)</li>
+                                            <li><i class="fa fa-user"></i>@Html.DisplayFor(model => model.CreatorName)</li>
+                                        </ul>
+                                    </div> <!-- /.blog-post-meta -->
+                                </div> <!-- /.blog-post-image -->
+                                <div class="blog-post-inner">
+                                    <h2 class="blog-post-title"><b>@Html.DisplayFor(model => model.Title)</b></h2>
+                                    
+                                    <p><strong>Thể loại tin: @Html.DisplayFor(model => model.NewsCategory.Name)</strong></p>
+                                    <p>
+                                        <blockquote>@Html.Raw(Model.NewsContent)</blockquote>
+                                    </p>
+                                    
+
+                                </div>
+                                
+                            </div> <!-- /.blog-post-container -->
+                        </div> <!-- /.col-md-12 -->
+                    </div> <!-- /.row -->     
+                    
+                    <hr />               
+                    <div class="form-group">
+                        <div class="col-md-offset-3 col-lg-9">
+                            @Html.ActionLink("Chỉnh sửa", "Edit", "News", new { Id = Model.Id }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Quay lại", "Index", "News", null, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

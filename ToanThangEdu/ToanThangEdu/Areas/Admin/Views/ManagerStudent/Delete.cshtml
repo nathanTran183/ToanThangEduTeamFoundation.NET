@@ -1,0 +1,116 @@
+﻿@model ToanThangEdu.Models.RegisterStudier
+
+@{
+    ViewBag.Title = "XÁC NHẬN XÓA RA KHỎI DANH SÁCH";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container form-horizontal">
+    <div class="row">
+
+        <div class="col-lg-8">
+            <div class="widget-item">
+                <h4 class="prof-name-list text-center">BẠN CÓ MUỐN ĐĂNG KÍ TÌM GIA SƯ NÀY???</h4>
+
+                <div>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.Label("Họ và tên:")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.FullName)
+                        </dd>
+
+                        <dt>
+                            @Html.Label("Số điện thoại:")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.PhoneNumber)
+                        </dd>
+
+                        <dt>
+                            @Html.Label("Email:")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Email)
+                        </dd>
+
+                        <dt>
+                            @Html.Label("Địa chỉ:")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Address)
+                        </dd>
+
+                        <dt>
+                            @Html.Label("Mức phí:")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Tuition)
+                        </dd>
+
+                        <dt>
+                            @Html.Label("Yêu cầu cấp độ GV:")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.TeacherLevel)
+                        </dd>
+                        <dt>
+                            @Html.Label("Số các tiết học:")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.NumberOfSession)
+                        </dd>
+
+                        <dt>
+                            @Html.Label("Nội dung học:")
+                        </dt>
+
+                        <dd>
+                            @{
+                                var studyContent = Model.StudyContent;
+                            }
+                            @Html.Raw(studyContent)
+                        </dd>
+
+
+
+                        <dt>
+                            @Html.Label("Chi tiết hơn:")
+                        </dt>
+
+                        <dd>
+                            @{
+                                var moreContent = Model.MoreContent;
+                            }
+                            @Html.Raw(moreContent)
+                        </dd>
+
+                    </dl>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-lg-10">
+                                <input type="submit" value="Xóa" class="btn btn-danger" />
+                                @Html.ActionLink("Quay lại", "Index", "ManagerStudent", null, new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

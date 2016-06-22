@@ -1,0 +1,60 @@
+﻿@model PagedList.IPagedList<ToanThangEdu.Models.Subject>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "QUẢN LÝ MÔN HỌC";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<h4 class="text-center">QUẢN LÝ MÔN HỌC</h4>
+
+
+<p>
+    @Html.ActionLink("Tạo mới môn học", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Tên môn học")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject1)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            <input type="button" class="btn btn-danger" id="btnOpenDialog" value="Delete" onclick="send(@item.Id)"/>
+             
+        </td>
+    </tr>
+}
+
+</table>
+
+<div id="dialog-confirm"></div>
+
+<script>
+    function send(id) {
+        $.ajax({
+            url: "@Url.Action("DeleteSubject", "Subjects")",
+            type: 'DELETE',
+            dataType: 'json',
+            data: { id: id },
+            async: true,
+            processData: false,
+            cache: false,
+            success: function (data) {
+                //$('#target').html(data.msg);
+                console.log('OKEY');
+            },
+            data: name
+        });
+    }
+</script>
+@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))

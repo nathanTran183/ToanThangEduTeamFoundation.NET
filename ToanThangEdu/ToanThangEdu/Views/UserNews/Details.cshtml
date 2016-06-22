@@ -1,0 +1,66 @@
+﻿@model ToanThangEdu.Models.News
+@using ToanThangEdu.Models
+@{
+    var list = (List<News>)ViewData["item"];
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_ToanThangLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+
+        <!-- Here begin Main Content -->
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="blog-post-container">
+                        <div class="blog-post-image">
+                            <img src="~/images/News/@Html.DisplayFor(model => model.ImageURL)" alt="No Image" />
+                            <div class="blog-post-meta">
+                                <ul>
+                                    <li><i class="fa fa-calendar-o"></i>@Html.DisplayFor(model => model.NewsDate)</li>
+                                    <li><i class="fa fa-user"></i>@Html.DisplayFor(model => model.CreatorName)</li>
+                                </ul>
+                            </div>
+                            <!-- /.blog-post-meta -->
+                        </div> <!-- /.blog-post-image -->
+
+                        <div class="blog-post-inner">
+                            <h3 class="blog-post-title">@Html.DisplayFor(model => model.Title)</h3>
+                            <p>
+                                <blockquote>@Html.Raw(Model.NewsContent)</blockquote>
+                            </p>
+                        </div>
+                    </div> <!-- /.blog-post-container -->
+                </div> <!-- /.col-md-12 -->
+            </div> <!-- /.row -->
+
+        </div> <!-- /.col-md-8 -->
+        <!-- Here begin Sidebar -->
+        <div class="col-md-4">
+
+            <!-- /.widget-main -->
+            <div class="widget-main">
+                <div class="widget-main-title">
+                    <h4 class="widget-title">Các tin khác</h4>
+                </div>
+                <div class="widget-inner">
+                    
+                    @foreach (var item in @list)
+                    {
+                        <div class="prof-list-item clearfix">
+                            <div class="prof-thumb">
+                                <img src="~/images/News/@Html.DisplayFor(model => item.ImageURL)" alt="Profesor Name" />
+                            </div> <!-- /.prof-thumb -->
+                            <div class="prof-details">
+                                @Html.ActionLink(Html.Raw(item.Title).ToString(), "Details", new { id = item.Id })
+                            </div> <!-- /.prof-details -->
+                        </div> <!-- /.prof-list-item -->
+                    }
+                    @Html.ActionLink("Xem thêm", "Index")
+                </div> <!-- /.widget-inner -->
+            </div> <!-- /.widget-main -->
+            
+        </div> <!-- /.col-md-4 -->
+    </div>
+</div>

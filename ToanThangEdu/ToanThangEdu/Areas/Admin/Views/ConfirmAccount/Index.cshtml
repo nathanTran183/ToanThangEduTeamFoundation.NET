@@ -1,0 +1,70 @@
+﻿@model PagedList.IPagedList<ToanThangEdu.Models.AspNetUser>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "QUẢN LÝ XÁC NHẬN TÀI KHOẢN";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<h4 class="text-center">QUẢN LÝ XÁC NHẬN TÀI KHOẢN</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Tên đăng nhập")
+        </th>
+        <th>
+            @Html.DisplayName("Email")
+        </th>
+        @*<th>
+                @Html.DisplayName("Xác nhận")
+            </th>*@
+        <th>
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.HomeTown)
+                </td>*@
+            <td>
+                <div class="row">
+                    <div class="col-lg-2">
+                        @using (Html.BeginForm("Confirm", "ConfirmAccount", new { area = "" }, FormMethod.Post, new { id = item.Id }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <a class='btn btn-warning btn-sm' href="javascript:document.getElementById('@item.Id').submit()" role='button'><span title="Xác nhận" class='glyphicon glyphicon-ok' aria-hidden='true'></span></a>
+
+                        }
+                    </div>
+                    <div class="col-lg-2">
+                        @using (Html.BeginForm("Delete", "ConfirmAccount", new { area = "" }, FormMethod.Post, new { id = "delete_" +@item.Id }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <a class='btn btn-danger btn-sm' href="javascript:document.getElementById('delete_@item.Id').submit()" role='button'><span title="Xóa" class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>
+                        }
+                    </div>
+                    
+                </div>
+                
+            </td>
+        </tr>
+        
+    }
+</table>
+
+@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))

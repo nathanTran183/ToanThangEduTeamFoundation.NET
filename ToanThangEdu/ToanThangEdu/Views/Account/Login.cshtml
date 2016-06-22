@@ -1,0 +1,92 @@
+﻿@using ToanThangEdu.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Đăng Nhập - Trung tâm Toàn Thắng";
+    Layout = "~/Views/Shared/_ToanThangLayout.cshtml";
+
+    var list = (List<Teacher>)ViewData["item"];
+}
+
+<div class="container form-horizontal">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="widget-item">
+                <section id="loginForm">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                        @Html.AntiForgeryToken()
+                        <h4 class="widget-title">Đăng nhập</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.UserName, new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-9">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-9">
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-lg-9">
+                                <input type="submit" value="Đăng nhập" class="btn btn-primary" />
+                                @*@Html.ActionLink("Đăng kí", "Register","Account", null, new { @class="btn btn-primary" })*@
+                            </div>
+                            @*<div class="col-md-offset-3 col-lg-9">
+                                @Html.ActionLink("Register as a new user", "Register")
+                            </div>*@
+                        </div>
+                        @* Enable this once you have account confirmation enabled for password reset functionality
+                    <p>
+                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                    </p>*@
+                    }
+                </section>
+                </div>
+            </div>
+        @*<div class="col-md-4">
+                <section id="socialLoginForm">
+                    @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                </section>
+            </div>*@
+
+        <div class="col-md-4">
+            <div class="widget-main">
+                <div class="widget-main-title">
+                    <h4 class="widget-title">GIÁO VIÊN TRUNG TÂM</h4>
+                </div>
+                <div class="widget-inner">
+                    @foreach (var item in @list)
+                    {
+                        <div class="prof-list-item clearfix">
+                            <div class="prof-thumb">
+                                <img src="~/images/Teacher/@Html.DisplayFor(model => item.ImageURL)" alt="Profesor Name" />
+                            </div> <!-- /.prof-thumb -->
+                            <div class="prof-details">
+                                <h5 class="prof-name-list">@Html.DisplayFor(model => item.Name)</h5>
+                                <p class="small-text">@Html.Raw(@item.Description)</p>
+                            </div> <!-- /.prof-details -->
+                        </div> <!-- /.prof-list-item -->
+                    }
+                </div> <!-- /.widget-main -->
+        </div> <!-- /.col-md-4 -->
+
+    </div>
+    </div>
+    </div>
+    @*@section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }*@

@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "Đăng Kí Tìm Gia Sư - Trung tâm Toàn Thắng";
+    Layout = "~/Views/Shared/_ToanThangLayout.cshtml";
+}
+
+
+<div class="container">
+    <div class="page-title clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="text-center">ĐĂNG KÍ TÌM GIA SƯ</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container form-horizontal">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="widget-item">
+                @using (Html.BeginForm("DangKiTimGiaSu", "DangKiTimGiaSu", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+            {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.Label("Họ và tên:", new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" name="FullName" placeholder="Nhập họ tên đầy đủ..." aria-describedby="basic-addon1" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Email:", new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" name="Email" placeholder="Nhập email của bạn..." aria-describedby="basic-addon1">
+                            @*<h4 class="col-lg-9" name="Email" value="">@ViewData["Email"]</h4>*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Số điện thoại:", new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" name="PhoneNumber" placeholder="Nhập số điện thoại..." aria-describedby="basic-addon1" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Địa chỉ chi tiết:", new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" name="Address" placeholder="Nhập địa chỉ chi tiết" required aria-describedby="basic-addon1" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Học vị:", new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" name="TeacherLevel" placeholder="Học vị của giáo viên" required aria-describedby="basic-addon1" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Nội dung học:", new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            <textarea cols="100%" rows="5" required class="form-control" name="StudyContent" placeholder="Nhập nội dung cần học..." aria-describedby="basic-addon1"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Số các buổi học:", new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            <input type="number" class="form-control" name="NumberOfSession" placeholder="Nhập tổng số các buổi học..." aria-describedby="basic-addon1" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Nội dung chi tiết hơn:", new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            <textarea cols="100%" rows="5" class="form-control" name="MoreContent" placeholder="Mô tả cụ thể hơn...." aria-describedby="basic-addon1" required></textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.Label("Mức phí:", new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8 input-group">
+                            <input type="number" class="form-control" name="Tuition" placeholder="Mức phí khóa học" required aria-describedby="basic-addon1" />
+                            <span class="input-group-addon" id="basic-addon2">VND</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-3 col-md-8">
+                            <input type="submit" class="btn btn-primary" value="Submit" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>

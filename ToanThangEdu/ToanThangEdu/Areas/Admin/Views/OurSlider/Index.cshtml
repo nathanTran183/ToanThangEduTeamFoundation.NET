@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "UPLOAD ẢNH";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    var fileName = ViewBag.FileName;
+}
+
+
+<script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/Content/js/plugins.js"></script>
+<script src="~/Content/js/custom.js"></script>
+
+
+<!-- CSS Bootstrap & Custom -->
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" />
+<link href="~/Content/css/font-awesome.min.css" rel="stylesheet" media="screen" />
+<link href="~/Content/css/animate.css" rel="stylesheet" media="screen" />
+
+<link href="~/Content/style.css" rel="stylesheet" media="screen" />
+
+<div class="container">
+        <div class="col-lg-12">
+                <div class="widget-main">
+                    <div class=" text-center">
+                        <h2>UPLOAD ẢNH</h2>
+
+                        @Html.ActionLink("Upload ảnh mới", "Create", "OurSlider", null, new { @class = "btn btn-primary" })
+                    </div>
+                    <div class="widget-inner">
+                        <div class="gallery-small-thumbs clearfix">
+                            @foreach (var item in fileName)
+                            {
+                                <div class="thumb-small-gallery">
+                                    <div class="row" style="margin-left:0px; margin-right:0px; height:70px">
+                                        <a class="fancybox" rel="gallery1" href="~/images/Gallary/@item" title="ẢNH UPLOAD">
+                                            <img src="~/images/Gallary/@item" alt="" />
+                                        </a>
+                                    </div>
+                                    <div class="row" style="margin-left:0px; margin-right:0px; height:70px">
+                                            <div>
+                                                @using (Html.BeginForm("Delete", "OurSlider", new { area = "" }, FormMethod.Post, new { id = "gallery_" + @item, onsubmit = "valid()" }))
+                                                {
+                                                    @Html.AntiForgeryToken()
+                                                    <input type="hidden" name="fileName" value="@item"/>
+                                                    <a href="javascript:void();" onclick="document.getElementById('gallery_@item').submit();" role='button'><span title="Xóa" class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>
+                                                    
+                                                }
+                                            </div>
+                                    </div>
+                                </div>
+                                
+                            }
+
+                        </div> <!-- /.galler-small-thumbs -->
+                    </div> <!-- /.widget-inner -->
+                </div> <!-- /.widget-main -->
+
+    </div>
+</div>
+

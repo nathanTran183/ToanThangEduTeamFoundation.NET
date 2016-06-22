@@ -1,0 +1,81 @@
+﻿@model ToanThangEdu.Models.Period
+
+@{
+    ViewBag.Title = "CHỈNH SỬA NỘI DUNG LỊCH HỌC";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("Edit", "Periods", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container form-horizontal">
+        <div class="row">
+
+            <div class="col-lg-10">
+                <div class="widget-item">
+
+
+                    <div class="form-horizontal">
+                        <h4 class="text-center">CHỈNH SỬA NỘI DUNG LỊCH HỌC</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Id)
+
+                        @*<div class="form-group">
+                            @Html.Label("Buổi:", htmlAttributes: new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-8">
+                                @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+                        <div class="form-group">
+                            @Html.Label("Giáo viên:", htmlAttributes: new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-8">
+                                @Html.DropDownList("Time", new SelectList(ViewBag.teacher, "Name", "Name"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Thứ:", htmlAttributes: new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-8">
+                                @Html.EditorFor(model => model.DayOfWeek, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DayOfWeek, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.Label("Khoảng thời gian:", htmlAttributes: new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-8">
+                                @Html.EditorFor(model => model.DistanceOfTime, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DistanceOfTime, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Các lớp học:", htmlAttributes: new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-8">
+                                @Html.EditorFor(model => model.Subjects, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DayOfWeek, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-lg-9">
+                                <input type="submit" value="Lưu thay đổi" class="btn btn-primary" />
+                                @Html.ActionLink("Quay lại", "Index", "Periods", null, new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+

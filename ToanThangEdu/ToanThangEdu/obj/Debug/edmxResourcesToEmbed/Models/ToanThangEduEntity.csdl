@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ToanThangEducationDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ToanThangEducationDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AspNetRoles" EntityType="ToanThangEducationDBModel.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="ToanThangEducationDBModel.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="ToanThangEducationDBModel.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="ToanThangEducationDBModel.AspNetUser" />
+    <EntitySet Name="Classes" EntityType="ToanThangEducationDBModel.Class" />
+    <EntitySet Name="DocumentItems" EntityType="ToanThangEducationDBModel.DocumentItem" />
+    <EntitySet Name="DocumentsCategories" EntityType="ToanThangEducationDBModel.DocumentsCategory" />
+    <EntitySet Name="Menus" EntityType="ToanThangEducationDBModel.Menu" />
+    <EntitySet Name="News" EntityType="ToanThangEducationDBModel.News" />
+    <EntitySet Name="NewsCategories" EntityType="ToanThangEducationDBModel.NewsCategory" />
+    <EntitySet Name="Periods" EntityType="ToanThangEducationDBModel.Period" />
+    <EntitySet Name="RegisterStudiers" EntityType="ToanThangEducationDBModel.RegisterStudier" />
+    <EntitySet Name="RegisterTeachers" EntityType="ToanThangEducationDBModel.RegisterTeacher" />
+    <EntitySet Name="Settings" EntityType="ToanThangEducationDBModel.Setting" />
+    <EntitySet Name="StudierInSchedules" EntityType="ToanThangEducationDBModel.StudierInSchedule" />
+    <EntitySet Name="Subjects" EntityType="ToanThangEducationDBModel.Subject" />
+    <EntitySet Name="SubjectSchedules" EntityType="ToanThangEducationDBModel.SubjectSchedule" />
+    <EntitySet Name="Teachers" EntityType="ToanThangEducationDBModel.Teacher" />
+    <EntitySet Name="Users" EntityType="ToanThangEducationDBModel.User" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="ToanThangEducationDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="ToanThangEducationDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubjectSchedule_Class" Association="ToanThangEducationDBModel.FK_SubjectSchedule_Class">
+      <End Role="Class" EntitySet="Classes" />
+      <End Role="SubjectSchedule" EntitySet="SubjectSchedules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DocumentItems_DocumentsCategories" Association="ToanThangEducationDBModel.FK_DocumentItems_DocumentsCategories">
+      <End Role="DocumentsCategory" EntitySet="DocumentsCategories" />
+      <End Role="DocumentItem" EntitySet="DocumentItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NewsCategories_Menus" Association="ToanThangEducationDBModel.FK_NewsCategories_Menus">
+      <End Role="Menu" EntitySet="Menus" />
+      <End Role="NewsCategory" EntitySet="NewsCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_News_NewsCategories" Association="ToanThangEducationDBModel.FK_News_NewsCategories">
+      <End Role="NewsCategory" EntitySet="NewsCategories" />
+      <End Role="News" EntitySet="News" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudierInSchedule_SubjectSchedule" Association="ToanThangEducationDBModel.FK_StudierInSchedule_SubjectSchedule">
+      <End Role="SubjectSchedule" EntitySet="SubjectSchedules" />
+      <End Role="StudierInSchedule" EntitySet="StudierInSchedules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubjectSchedule_Subject" Association="ToanThangEducationDBModel.FK_SubjectSchedule_Subject">
+      <End Role="Subject" EntitySet="Subjects" />
+      <End Role="SubjectSchedule" EntitySet="SubjectSchedules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubjectSchedule_Teachers" Association="ToanThangEducationDBModel.FK_SubjectSchedule_Teachers">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="SubjectSchedule" EntitySet="SubjectSchedules" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="ToanThangEducationDBModel.AspNetUserRoles">
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Discriminator" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="ToanThangEducationDBModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="ToanThangEducationDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="ToanThangEducationDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="Activated" Type="Boolean" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="ToanThangEducationDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="ToanThangEducationDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+    <NavigationProperty Name="AspNetRoles" Relationship="ToanThangEducationDBModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+  </EntityType>
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SubjectSchedules" Relationship="ToanThangEducationDBModel.FK_SubjectSchedule_Class" FromRole="Class" ToRole="SubjectSchedule" />
+  </EntityType>
+  <EntityType Name="DocumentItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="DocumentContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DocumentURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryId" Type="Int64" />
+    <NavigationProperty Name="DocumentsCategory" Relationship="ToanThangEducationDBModel.FK_DocumentItems_DocumentsCategories" FromRole="DocumentItem" ToRole="DocumentsCategory" />
+  </EntityType>
+  <EntityType Name="DocumentsCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="RootId" Type="Int32" />
+    <NavigationProperty Name="DocumentItems" Relationship="ToanThangEducationDBModel.FK_DocumentItems_DocumentsCategories" FromRole="DocumentsCategory" ToRole="DocumentItem" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="MenuURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="NewsCategories" Relationship="ToanThangEducationDBModel.FK_NewsCategories_Menus" FromRole="Menu" ToRole="NewsCategory" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="NewsContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryId" Type="Int64" />
+    <Property Name="NewsDate" Type="DateTime" Precision="0" />
+    <Property Name="ImageURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CreatorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="NewsCategory" Relationship="ToanThangEducationDBModel.FK_News_NewsCategories" FromRole="News" ToRole="NewsCategory" />
+  </EntityType>
+  <EntityType Name="NewsCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="RootId" Type="Int64" />
+    <Property Name="MenuId" Type="Int64" />
+    <NavigationProperty Name="Menu" Relationship="ToanThangEducationDBModel.FK_NewsCategories_Menus" FromRole="NewsCategory" ToRole="Menu" />
+    <NavigationProperty Name="News" Relationship="ToanThangEducationDBModel.FK_News_NewsCategories" FromRole="NewsCategory" ToRole="News" />
+  </EntityType>
+  <EntityType Name="Period">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DistanceOfTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DayOfWeek" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Subjects" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="RegisterStudier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Tuition" Type="Int64" />
+    <Property Name="TeacherLevel" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="StudyContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NumberOfSession" Type="Int32" />
+    <Property Name="MoreContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="RegisterTeacher">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fullname" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="YearOfBirth" Type="Int32" />
+    <Property Name="Gender" Type="Int32" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="TeachContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TeachArea" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Tuition" Type="Int64" />
+    <Property Name="Email" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="MoreContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Setting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="AboutContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContactContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="StudierInSchedule">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubjectScheduleId" Type="Int32" />
+    <Property Name="StudierId" Type="Int64" />
+    <NavigationProperty Name="SubjectSchedule" Relationship="ToanThangEducationDBModel.FK_StudierInSchedule_SubjectSchedule" FromRole="StudierInSchedule" ToRole="SubjectSchedule" />
+  </EntityType>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Subject1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SubjectSchedules" Relationship="ToanThangEducationDBModel.FK_SubjectSchedule_Subject" FromRole="Subject" ToRole="SubjectSchedule" />
+  </EntityType>
+  <EntityType Name="SubjectSchedule">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ScheduleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PeriodId" Type="Int32" />
+    <Property Name="TeacherId" Type="Int64" />
+    <Property Name="ClassId" Type="Int32" />
+    <Property Name="SubjectId" Type="Int32" />
+    <NavigationProperty Name="Class" Relationship="ToanThangEducationDBModel.FK_SubjectSchedule_Class" FromRole="SubjectSchedule" ToRole="Class" />
+    <NavigationProperty Name="StudierInSchedules" Relationship="ToanThangEducationDBModel.FK_StudierInSchedule_SubjectSchedule" FromRole="SubjectSchedule" ToRole="StudierInSchedule" />
+    <NavigationProperty Name="Subject" Relationship="ToanThangEducationDBModel.FK_SubjectSchedule_Subject" FromRole="SubjectSchedule" ToRole="Subject" />
+    <NavigationProperty Name="Teacher" Relationship="ToanThangEducationDBModel.FK_SubjectSchedule_Teachers" FromRole="SubjectSchedule" ToRole="Teacher" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ImageURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="TeacherType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SubjectSchedules" Relationship="ToanThangEducationDBModel.FK_SubjectSchedule_Teachers" FromRole="Teacher" ToRole="SubjectSchedule" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Type="ToanThangEducationDBModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="ToanThangEducationDBModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaim">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="ToanThangEducationDBModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="ToanThangEducationDBModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogin">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubjectSchedule_Class">
+    <End Type="ToanThangEducationDBModel.Class" Role="Class" Multiplicity="0..1" />
+    <End Type="ToanThangEducationDBModel.SubjectSchedule" Role="SubjectSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SubjectSchedule">
+        <PropertyRef Name="ClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DocumentItems_DocumentsCategories">
+    <End Type="ToanThangEducationDBModel.DocumentsCategory" Role="DocumentsCategory" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="ToanThangEducationDBModel.DocumentItem" Role="DocumentItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocumentsCategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DocumentItem">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NewsCategories_Menus">
+    <End Type="ToanThangEducationDBModel.Menu" Role="Menu" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="ToanThangEducationDBModel.NewsCategory" Role="NewsCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NewsCategory">
+        <PropertyRef Name="MenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_News_NewsCategories">
+    <End Type="ToanThangEducationDBModel.NewsCategory" Role="NewsCategory" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="ToanThangEducationDBModel.News" Role="News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NewsCategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudierInSchedule_SubjectSchedule">
+    <End Type="ToanThangEducationDBModel.SubjectSchedule" Role="SubjectSchedule" Multiplicity="0..1" />
+    <End Type="ToanThangEducationDBModel.StudierInSchedule" Role="StudierInSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubjectSchedule">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudierInSchedule">
+        <PropertyRef Name="SubjectScheduleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubjectSchedule_Subject">
+    <End Type="ToanThangEducationDBModel.Subject" Role="Subject" Multiplicity="0..1" />
+    <End Type="ToanThangEducationDBModel.SubjectSchedule" Role="SubjectSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SubjectSchedule">
+        <PropertyRef Name="SubjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubjectSchedule_Teachers">
+    <End Type="ToanThangEducationDBModel.Teacher" Role="Teacher" Multiplicity="0..1" />
+    <End Type="ToanThangEducationDBModel.SubjectSchedule" Role="SubjectSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SubjectSchedule">
+        <PropertyRef Name="TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="ToanThangEducationDBModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+    <End Type="ToanThangEducationDBModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+  </Association>
+</Schema>

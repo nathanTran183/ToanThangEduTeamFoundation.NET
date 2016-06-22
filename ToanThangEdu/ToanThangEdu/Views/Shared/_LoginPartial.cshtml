@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNet.Identity
+@using ToanThangEdu.Models;
+@using ToanThangEdu.Controllers;
+@if (Request.IsAuthenticated)
+ {   
+    ToanThangEducationDBEntities db = new ToanThangEducationDBEntities();
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+    <ul class="small-links">
+        @*@if (Session["User_Email"]!= null && !Session["User_Email"].ToString().Equals(""))
+        {
+            
+                var userFind = db.AspNetUsers.FirstOrDefault(x => x.Id == User.Identity.GetUserId());
+                var imageURL = db.Teachers.FirstOrDefault(x => x.Id == userFind.Id).ImageURL;
+            
+            <div class="prof-thumb" style="width:30px; height:30px">
+                <img src="~/images/Teacher/@imageURL" alt="Profesor Name" />
+            </div>
+        }*@        
+        <li>@Html.ActionLink(User.Identity.GetUserName() + " ", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
+        @{
+
+            if (Session["IsStudent"] != null)
+            {
+                var IsStudent = (bool)Session["IsStudent"];
+                if (IsStudent == false)
+                {
+                    <li><a href=@Url.Action("Index","Admin/Index")>Quản lý</a></li>
+                }
+            }
+
+        }
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="small-links">
+
+        <li><a href=@Url.Action("Login","Account")>Đăng nhập</a></li>
+        <li><a href=@Url.Action("Register","Account")>Đăng kí</a></li>
+        @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+    </ul>
+
+}

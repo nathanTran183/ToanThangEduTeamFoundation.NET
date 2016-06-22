@@ -1,0 +1,46 @@
+﻿@model ToanThangEdu.Models.DocumentsCategory
+
+@{
+    ViewBag.Title = "XÓA THỂ LOẠI TÀI LIỆU";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container form-horizontal">
+    <div class="row">
+        <div  class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <div class="widget-item">
+                <div class="form-horizontal">
+                    <h4 class="text-center">XÓA THỂ LOẠI TÀI LIỆU</h4>
+                    
+                    <hr />
+                    <h3>Bạn có muốn xóa thể loại này?</h3>
+                    <div>                        
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayName("Tên: ")
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Name)
+                            </dd>
+
+                        </dl>
+
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-lg-10">
+                                    <input type="submit" value="Xóa" class="btn btn-danger" />
+                                    @Html.ActionLink("Quay lại", "Index", "DocumentsCategories", null, new { @class = "btn btn-primary" })
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

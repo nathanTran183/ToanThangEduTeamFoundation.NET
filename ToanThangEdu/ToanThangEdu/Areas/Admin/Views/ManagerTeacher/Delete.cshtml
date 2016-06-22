@@ -1,0 +1,184 @@
+﻿@using ToanThangEdu.Areas.Admin.Models;
+@{
+    ViewBag.Title = "XÁC NHẬN XÓA";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var check = ViewBag.IsRegisterTeacher;
+    var teacher = (TeacherCustomizeModel)ViewBag.Teacher;
+}
+
+<div class="container form-horizontal">
+    <div class="row">
+
+            <div class="widget-item">
+                
+                @using (Html.BeginForm("DeleteTeacher", "ManagerTeacher", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("Id", teacher.Id)
+                    if (check == false)
+                    {
+                        <h4 class="prof-name-list text-center">BẠN CÓ MUỐN XÓA GIÁO VIÊN NÀY?</h4>
+                        <hr />
+                        <div class="container">
+                            <div class="col-lg-5">
+                                <div class="prof-thumb">
+                                    @if (teacher.ImageURL == null)
+                                    {
+                                        <img style="width: 300px; height: 300px" src="~/images/Teacher/No_Image_Available.png" alt="Profesor Name" />
+                                    }
+                                    else
+                                    {
+                                        <img style="width: 300px; height: 300px" src="~/images/Teacher/@teacher.ImageURL" alt="Profesor Name" />
+                                    }
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-7">
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        @Html.DisplayName("Tên giáo viên:")
+                                    </dt>
+
+                                    <dd>
+                                        @teacher.Name
+                                    </dd>
+
+                                    @*<dt>
+                                            @Html.DisplayName("Ảnh đại diện:")
+                                        </dt>
+
+                                        <dd>
+                                            <div class="prof-thumb">
+                                                <img style="width: 40px; height: 40px" src="~/images/Teacher/@teacher.ImageURL" alt="Profesor Name" />
+                                            </div>
+                                        </dd>*@
+
+                                    <dt>
+                                        @Html.DisplayName("Học vị:")
+                                    </dt>
+
+                                    <dd>
+                                        @teacher.TeacherType.ToString()
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayName("Mô tả:")
+                                    </dt>
+
+                                    <dd>
+                                        @Html.Raw(teacher.Description)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayName("Mô tả chi tiết:")
+                                    </dt>
+
+                                    <dd>
+                                        @Html.Raw(teacher.Detail)
+                                    </dd>
+
+                                </dl>
+                                <div class="form-group">
+                                    <div class="col-md-offset-3 col-lg-9">
+                                        <input type="submit" value="Xóa" class="btn btn-danger" />
+                                        @Html.ActionLink("Quay lại", "Index", "ManagerTeacher", null, new { @class = "btn btn-primary" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-lg-10">
+                            <h4 class="prof-name-list text-center">BẠN CÓ MUỐN XÓA HỌC SINH NÀY?</h4>
+                            <br />
+
+                            <div class="col-lg-7">
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        @Html.DisplayName("Tên giáo viên:")
+                                    </dt>
+
+                                    <dd>
+                                        @teacher.FullName
+                                    </dd>
+                                    <dt>
+                                        @Html.DisplayName("Email:")
+                                    </dt>
+
+                                    <dd>
+                                        @teacher.Email
+                                    </dd>
+                                    <dt>
+                                        @Html.DisplayName("Số điện thoại:")
+                                    </dt>
+
+                                    <dd>
+                                        @teacher.PhoneNumber
+                                    </dd>
+                                    <dt>
+                                        @Html.DisplayName("Giới tính:")
+                                    </dt>
+
+                                    <dd>
+                                        @teacher.Gender
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayName("Trình độ:")
+                                    </dt>
+
+                                    <dd>
+                                        @teacher.TeachLevel.ToString()
+                                    </dd>
+                                    <dt>
+                                        @Html.DisplayName("Phạm vi dạy:")
+                                    </dt>
+
+                                    <dd>
+                                        @teacher.TeachArea
+                                    </dd>
+                                    <dt>
+                                        @Html.DisplayName("Phí dạy:")
+                                    </dt>
+
+                                    <dd>
+                                        @teacher.Tuition
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayName("Nội dung dạy:")
+                                    </dt>
+
+                                    <dd>
+                                        @Html.Raw(teacher.TeachContent)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayName("Mô tả chi tiết:")
+                                    </dt>
+
+                                    <dd>
+                                        @Html.Raw(teacher.MoreContent)
+                                    </dd>
+
+                                </dl>
+                                <div class="form-group">
+                                    <div class="col-md-offset-3 col-lg-9">
+                                        <input type="submit" value="Xóa" class="btn btn-danger" />
+                                        @Html.ActionLink("Quay lại", "Index", "ManagerTeacher", null, new { @class = "btn btn-primary" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                }
+            </div>
+
+        </div>
+
+</div>
+
+

@@ -1,0 +1,83 @@
+﻿@model ToanThangEdu.Areas.Admin.Models.EditUserViewModel
+@{
+    ViewBag.Title = "CHỈNH SỬA TÀI KHOẢN";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    
+}
+
+<div class="container form-horizontal">
+    <div class="row">
+
+        <div class="col-lg-10">
+            <div class="widget-item">
+                <h4 class="prof-name-list text-center">CHỈNH SỬA TÀI KHOẢN </h4>
+                <hr />
+                @using (Html.BeginForm("Edit", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.Label("Tên đăng nhập:", new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Email:", new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">
+                            Quyền tài khoản:
+                        </label>
+                        <div class="col-md-8">
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-default" id="role1">
+                                    <input type="radio" name="selectedRole" value="Student" /> Student
+                                </label>
+                                <label class="btn btn-default" id="role2">
+                                    <input type="radio"  name="selectedRole" value="Teacher" /> Teacher
+                                </label>
+                                <label class="btn btn-default" id="role3">
+                                    <input type="radio"  name="selectedRole" value="Admin" /> Admin
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-3 col-md-8">
+                            <input type="submit" class="btn btn-primary" value="Lưu thay đổi" />
+                            @Html.ActionLink("Quay lại", "Index", "User", null, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                    <script>
+                        var data = '@ViewBag.Role';
+                        if (data == 'Admin') {
+                            var d = document.getElementById('role3');
+                            d.className += " active";
+                        } else {
+                            if (data == 'Teacher') {
+                                var d = document.getElementById('role2');
+                                d.className += " active";
+                            }else{
+                                var d = document.getElementById('role1');
+                                d.className += " active";
+                            }                            
+                        }
+
+                    </script>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>

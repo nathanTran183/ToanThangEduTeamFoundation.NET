@@ -1,0 +1,342 @@
+﻿@model PagedList.IPagedList<ToanThangEdu.Models.News>
+@using ToanThangEdu.Models;
+@using System.Text.RegularExpressions;
+@{
+    ViewBag.Title = "Trang Chủ - Trung tâm Toàn Thắng";
+    Layout = "~/Views/Shared/_ToanThangLayout.cshtml";
+
+    List<NewsCustomize> slide = new List<NewsCustomize>();
+    slide = (List<NewsCustomize>)ViewBag.Slide;
+    var introArr = new string[3];
+    for (int i = 0; i < 3; i++)
+    {
+        //introArr[i] = slide[i].newsContent;
+        var a = Html.Raw(slide[i].newsContent);
+        var beware = Regex.Replace(a.ToString(), "<.*?>", String.Empty);
+
+        introArr[i] = Html.Raw(beware.Substring(0, 80)) + " .....";
+    }
+    //NewsCustomize tintuc = new NewsCustomize();
+    //tintuc = (NewsCustomize)ViewBag.New;
+    var list = (List<Teacher>)ViewData["item"];
+    var news = (List<News>)ViewData["news"];
+    var about = (List<News>)ViewData["about"];
+    var listDocuments = (List<DocumentItem>)ViewData["itemDocuments"];
+
+    var fileName = ViewBag.FileName;
+}
+
+<script>
+        jQuery(document).ready(function ($) {
+
+            var jssor_1_SlideoTransitions = [
+              [{b:0,d:600,y:-290,e:{y:27}}],
+              [{b:0,d:1000,y:185},{b:1000,d:500,o:-1},{b:1500,d:500,o:1},{b:2000,d:1500,r:360},{b:3500,d:1000,rX:30},{b:4500,d:500,rX:-30},{b:5000,d:1000,rY:30},{b:6000,d:500,rY:-30},{b:6500,d:500,sX:1},{b:7000,d:500,sX:-1},{b:7500,d:500,sY:1},{b:8000,d:500,sY:-1},{b:8500,d:500,kX:30},{b:9000,d:500,kX:-30},{b:9500,d:500,kY:30},{b:10000,d:500,kY:-30},{b:10500,d:500,c:{x:87.50,t:-87.50}},{b:11000,d:500,c:{x:-87.50,t:87.50}}],
+              [{b:0,d:600,x:410,e:{x:27}}],
+              [{b:-1,d:1,o:-1},{b:0,d:600,o:1,e:{o:5}}],
+              [{b:-1,d:1,c:{x:175.0,t:-175.0}},{b:0,d:800,c:{x:-175.0,t:175.0},e:{c:{x:7,t:7}}}],
+              [{b:-1,d:1,o:-1},{b:0,d:600,x:-570,o:1,e:{x:6}}],
+              [{b:-1,d:1,o:-1,r:-180},{b:0,d:800,o:1,r:180,e:{r:7}}],
+              [{b:0,d:1000,y:80,e:{y:24}},{b:1000,d:1100,x:570,y:170,o:-1,r:30,sX:9,sY:9,e:{x:2,y:6,r:1,sX:5,sY:5}}],
+              [{b:2000,d:600,rY:30}],
+              [{b:0,d:500,x:-105},{b:500,d:500,x:230},{b:1000,d:500,y:-120},{b:1500,d:500,x:-70,y:120},{b:2600,d:500,y:-80},{b:3100,d:900,y:160,e:{y:24}}],
+              [{b:0,d:1000,o:-0.4,rX:2,rY:1},{b:1000,d:1000,rY:1},{b:2000,d:1000,rX:-1},{b:3000,d:1000,rY:-1},{b:4000,d:1000,o:0.4,rX:-1,rY:-1}]
+            ];
+
+            var jssor_1_options = {
+              $AutoPlay: true,
+              $Idle: 2000,
+              $CaptionSliderOptions: {
+                $Class: $JssorCaptionSlideo$,
+                $Transitions: jssor_1_SlideoTransitions,
+                $Breaks: [
+                  [{d:2000,b:1000}]
+                ]
+              },
+              $ArrowNavigatorOptions: {
+                $Class: $JssorArrowNavigator$
+              },
+              $BulletNavigatorOptions: {
+                $Class: $JssorBulletNavigator$
+              }
+            };
+
+            var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+
+            //responsive code begin
+            //you can remove responsive code if you don't want the slider scales while window resizing
+            function ScaleSlider() {
+                var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
+                if (refSize) {
+                    refSize = Math.min(refSize);
+                    jssor_1_slider.$ScaleWidth(refSize);
+                }
+                else {
+                    window.setTimeout(ScaleSlider, 30);
+                }
+            }
+            ScaleSlider();
+            $(window).bind("load", ScaleSlider);
+            $(window).bind("resize", ScaleSlider);
+            $(window).bind("orientationchange", ScaleSlider);
+            //responsive code end
+        });
+</script>
+
+<style>
+    /* jssor slider bullet navigator skin 01 css */
+    /*
+        .jssorb01 div           (normal)
+        .jssorb01 div:hover     (normal mouseover)
+        .jssorb01 .av           (active)
+        .jssorb01 .av:hover     (active mouseover)
+        .jssorb01 .dn           (mousedown)
+        */
+    .jssorb01 {
+        position: absolute;
+    }
+
+        .jssorb01 div, .jssorb01 div:hover, .jssorb01 .av {
+            position: absolute;
+            /* size of bullet elment */
+            width: 12px;
+            height: 12px;
+            filter: alpha(opacity=70);
+            opacity: .7;
+            overflow: hidden;
+            cursor: pointer;
+            border: #000 1px solid;
+        }
+
+        .jssorb01 div {
+            background-color: gray;
+        }
+
+            .jssorb01 div:hover, .jssorb01 .av:hover {
+                background-color: #d3d3d3;
+            }
+
+        .jssorb01 .av {
+            background-color: #fff;
+        }
+
+        .jssorb01 .dn, .jssorb01 .dn:hover {
+            background-color: #555555;
+        }
+
+    /* jssor slider arrow navigator skin 02 css */
+    /*
+        .jssora02l                  (normal)
+        .jssora02r                  (normal)
+        .jssora02l:hover            (normal mouseover)
+        .jssora02r:hover            (normal mouseover)
+        .jssora02l.jssora02ldn      (mousedown)
+        .jssora02r.jssora02rdn      (mousedown)
+        */
+    .jssora02l, .jssora02r {
+        display: block;
+        position: absolute;
+        /* size of arrow element */
+        width: 55px;
+        height: 55px;
+        cursor: pointer;
+        background: url('../../images/a02.png') no-repeat;
+        overflow: hidden;
+    }
+
+    .jssora02l {
+        background-position: -3px -33px;
+    }
+
+    .jssora02r {
+        background-position: -63px -33px;
+    }
+
+    .jssora02l:hover {
+        background-position: -123px -33px;
+    }
+
+    .jssora02r:hover {
+        background-position: -183px -33px;
+    }
+
+    .jssora02l.jssora02ldn {
+        background-position: -3px -33px;
+    }
+
+    .jssora02r.jssora02rdn {
+        background-position: -63px -33px;
+    }
+</style>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="main-slideshow">
+                <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 600px; height: 300px; overflow: hidden; visibility: hidden;">
+                    <!-- Loading Screen -->
+                    <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
+                        <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+                        <div style="position:absolute;display:block;background:url('../../images/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
+                    </div>
+                    <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: -10px; width: 600px; height: 300px; overflow: hidden;">
+
+                        @foreach (var item in slide)
+                        {
+                            <div data-p="112.50" style="display: none;">
+                                <a href="@Url.Action("Details","UserNews",new {id = item.id })">
+                                    <img data-u="image" src="~/images/News/@item.image" />
+                                </a>
+                                
+                            </div>
+                        }
+                        
+                        
+                    </div>
+                    <!-- Bullet Navigator -->
+                    <div data-u="navigator" class="jssorb01" style="bottom:16px;right:16px;">
+                        <div data-u="prototype" style="width:12px;height:12px;"></div>
+                    </div>
+                    <!-- Arrow Navigator -->
+                    <span data-u="arrowleft" class="jssora02l" style="top:0px;left:8px;width:55px;height:55px;" data-autocenter="2"></span>
+                    <span data-u="arrowright" class="jssora02r" style="top:0px;right:8px;width:55px;height:55px;" data-autocenter="2"></span>
+                    
+                </div>
+            </div>
+            <!--Tin mới nhất-->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="widget-item">
+                        <h2 class="welcome-text">@ViewBag.New.Title </h2>
+                        @Html.Raw(ViewBag.New.NewsContent)
+                    </div> <!-- /.widget-item -->
+                </div> <!-- /.col-md-12 -->
+            </div> <!-- /.row -->
+
+            <!--Chia sẻ tài liệu-->
+            <div class="row">
+
+                @foreach (var item in listDocuments)
+                {
+                    <div class="col-md-6">
+                        <div class="list-event-item">
+                            <div class="box-content-inner clearfix">
+                                <div class="list-event-thumb">
+                                    <a href="@Url.Action("Details","UserDocumentItems", new { id = item.Id })">
+                                        @if (item.DocumentURL.Contains(".pdf"))
+                                        {
+                                            <img src="~/images/Document/pdf.png" alt="No Image" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/images/Document/word.png" alt="No Image" />
+                                        }
+                                    </a>
+                                </div>
+                                <div class="list-event-header">
+                                    <span class="event-place small-text"><i class="fa fa-globe"></i>@Html.DisplayFor(model => item.DocumentsCategory.Name)</span>
+                                </div>
+                                <h3 class="event-title">@Html.ActionLink(@item.Name.ToString(), "Details", "UserDocumentItems", new { id = item.Id }, htmlAttributes: new { @class = "event-title" })</h3>
+                                
+                            </div> <!-- /.box-content-inner -->
+                        </div> <!-- /.list-event-item -->
+
+                    </div> <!-- /.col-md-12 -->
+                }
+            </div> <!-- /.row -->
+
+        </div> <!-- /.col-md-8 -->
+        
+        <div class="col-md-4">
+            <!--Giới thiệu-->
+            <div class="widget-main">
+                <div class="widget-main-title">
+                    <h4 class="widget-title">Giới thiệu</h4>
+                </div> <!-- /.widget-main-title -->
+                <div class="widget-inner">
+                    @foreach (var item1 in about)
+                    {
+                        <div class="blog-list-post clearfix">
+                            <div class="blog-list-thumb">
+                                <a href="@Url.Action("Details","UserNews",new {id = item1.Id })"><img src="~/images/News/@item1.ImageURL" alt="" /></a>
+                            </div>
+                            <div class="blog-list-details">
+                                <h5 class="blog-list-title"><a href="@Url.Action("Details","UserNews",new {id = item1.Id })">@Html.DisplayFor(x => item1.Title)</a></h5>
+                                <p class="blog-list-meta small-text"><span></span></p>
+                            </div>
+                        </div> <!-- /.blog-list-post -->
+                    }
+                </div> <!-- /.widget-inner -->
+            </div> <!-- /.widget-main -->
+
+            <!--Tin tức mới nhất-->
+            <div class="widget-main">
+                <div class="widget-main-title">
+                    <h4 class="widget-title">Tin tức mới nhất</h4>
+                </div> <!-- /.widget-main-title -->
+                <div class="widget-inner">
+                    @foreach (var item in news)
+                    {
+                        <div class="blog-list-post clearfix">
+                            <div class="blog-list-thumb">
+                                <a href="@Url.Action("Details","UserNews",new {id = item.Id })"><img src="~/images/News/@item.ImageURL" alt="" /></a>
+                            </div>
+                            <div class="blog-list-details">
+                                <h5 class="blog-list-title"><a href="@Url.Action("Details","UserNews",new {id = item.Id })">@Html.DisplayFor(x => item.Title)</a></h5>
+                                <p class="blog-list-meta small-text"><span>@Html.DisplayFor(x => item.NewsDate)</span> Tác giả: <span>@Html.DisplayFor(x => item.CreatorName)</span></p>
+                            </div>
+                        </div> <!-- /.blog-list-post -->
+                    }
+                </div> <!-- /.widget-inner -->
+            </div> <!-- /.widget-main -->
+
+            <!--Giảng viên trung tâm-->
+            <div class="widget-main">
+                <div class="widget-main-title">
+                    <h4 class="widget-title">GIÁO VIÊN TRUNG TÂM</h4>
+                </div>
+                <div class="widget-inner">
+                    @foreach (var item in @list)
+                    {
+                        <div class="prof-list-item clearfix">
+                            <div class="prof-thumb">
+                                <img src="~/images/Teacher/@Html.DisplayFor(model => item.ImageURL)" alt="Profesor Name" />
+                            </div> <!-- /.prof-thumb -->
+                            <div class="prof-details">
+                                <h5 class="prof-name-list">@Html.DisplayFor(model => item.Name)</h5>
+                                <p class="small-text">@Html.Raw(@item.Description)</p>
+                            </div> <!-- /.prof-details -->
+                        </div> <!-- /.prof-list-item -->
+                    }
+                </div> <!-- /.widget-inner -->
+            </div> <!-- /.widget-main -->
+            
+            
+
+            <!--Thư viện ảnh-->
+            <div class="widget-main">
+                <div class="widget-main-title">
+                    <h4 class="widget-title">THƯ VIỆN ẢNH</h4>
+                </div>
+                <div class="widget-inner">
+                    <div class="gallery-small-thumbs clearfix">
+                        @foreach (var item in fileName)
+                        {
+                            <div class="thumb-small-gallery">
+                                <a class="fancybox" rel="gallery1" href="~/images/Gallary/@item" title="ẢNH UPLOAD">
+                                    <img src="~/images/Gallary/@item" alt="" />
+                                </a>
+                            </div>
+                        }
+                    </div> <!-- /.galler-small-thumbs -->
+                </div> <!-- /.widget-inner -->
+            </div> <!-- /.widget-main -->
+
+
+        </div> <!-- /.col-md-4 -->
+
+        
+    </div>
+</div>
+

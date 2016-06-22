@@ -1,0 +1,94 @@
+﻿@model IEnumerable<ToanThangEdu.Models.SubjectSchedule>
+
+@{
+    ViewBag.Title = "Index";
+    var time = (List<String>)ViewBag.time;
+    int countNumber;
+    var daysList = (List<string>)ViewBag.DaysOfWeek;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="prof-name-list text-center">LỊCH HỌC</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayName("Thứ")
+        </th>
+        <th>
+            @Html.DisplayName("Buổi")
+        </th>
+        <th>
+            @Html.DisplayName("Thời gian")
+        </th>
+        <th>
+            @Html.DisplayName("Môn học")
+        </th>
+        @*<th>
+            @Html.DisplayName("Lớp học")
+        </th>
+        <th>
+            @Html.DisplayName("Giáo viên phụ trách")
+        </th>*@               
+        <th></th>
+    </tr>
+    @foreach (var item in daysList)
+    {
+        var itemModel = Model.Where(x => x.Period.DayOfWeek == item).ToList();
+        countNumber = itemModel.Count();
+        if (countNumber == 0) { continue; }
+        var secondRowOrHigher = false;
+        @:<tr>
+            <td rowspan="@countNumber">@item</td>
+        foreach (var subitem in time)
+        {
+            var itemModel1 = itemModel.Where(x => x.Period.Time == subitem).ToList();
+            countNumber = itemModel1.Count();
+            if (countNumber == 0) { continue; }
+            if (secondRowOrHigher)
+            {
+                @:<tr>
+            }
+            var subsecond = false;
+            <td rowspan="@countNumber">@subitem</td>
+            foreach (var childItem in itemModel1.GroupBy(x => x.Period.DistanceOfTime))
+            {
+                if (subsecond)
+                {
+                    @: <tr>
+                }
+                var itemsecond = false;
+                <td rowspan="@childItem.Count()">@childItem.Key</td>
+                foreach (var tinyItem in childItem.OrderBy(x => x.Class.ClassName))
+                {
+                    if (itemsecond)
+                    {
+                        @: <tr>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => tinyItem.Subject.Subject1)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => tinyItem.Class.ClassName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => tinyItem.Teacher.Name)
+                    </td>*@                                        
+                    <td>
+                        @Html.ActionLink("Chỉnh sửa", "Edit", new { id = tinyItem.Id })
+                        @Html.ActionLink("Xóa lịch", "Delete", new { id = tinyItem.Id })
+                    </td>
+                    @: </tr>
+                    itemsecond = true;
+                }
+                subsecond = true;
+            }
+            secondRowOrHigher = true;
+        }
+    }
+</table>
+
+

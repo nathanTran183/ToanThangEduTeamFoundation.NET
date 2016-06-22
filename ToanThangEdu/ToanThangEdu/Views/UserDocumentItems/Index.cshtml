@@ -1,0 +1,193 @@
+﻿@model PagedList.IPagedList<ToanThangEdu.Models.DocumentItem>
+@using PagedList.Mvc;
+@using ToanThangEdu.Models
+@using ToanThangEdu.Areas.Admin.Controllers
+@{
+    //ViewBag.Title = "Tài Liệu - Trung tâm Toàn Thắng";
+    //var list = (List<DocumentsCategory>)ViewData["item"];
+    ToanThangEducationDBEntities db = new ToanThangEducationDBEntities();
+    var listMenu = new List<MenuInView>();
+    var listRootId = new List<Int64>();
+    foreach (var item in db.DocumentsCategories.OrderBy(x => x.Id))
+    {
+        if (item.RootId == 0 || item.RootId == null)
+        {
+            var tmp = Convert.ToInt64(item.Id);
+            listRootId.Add(tmp);
+        }
+    }
+    foreach (var item in listRootId)
+    {
+        MenuInView tmp = new MenuInView();
+        tmp.Id = item;
+        var listTmp = db.DocumentsCategories.Where(x => x.RootId == item).ToList();
+        var rootName = db.DocumentsCategories.Where(x => x.Id == item).FirstOrDefault();
+        if (rootName == null)
+        {
+            tmp.PaMenu = "Root đã được xóa";
+        }
+        else
+        {
+            tmp.PaMenu = rootName.Name;
+        }
+
+        List<MenuChild> listChild = new List<MenuChild>();
+        foreach (var itemChild in listTmp)
+        {
+            MenuChild menuTmp = new MenuChild();
+            var dcTmp = db.DocumentsCategories.Where(x => x.Id == itemChild.Id).FirstOrDefault();
+            menuTmp.Id = dcTmp.Id;
+            menuTmp.ChiMenu = dcTmp.Name;
+            listChild.Add(menuTmp);
+        }
+        tmp.ChiMenu = listChild;
+        listMenu.Add(tmp);
+    }
+    Layout = "~/Views/Shared/_ToanThangLayout.cshtml";
+}
+
+<div class="container">
+    <div class="page-title clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-center page-active "><h2><b>TÀI LIỆU CHIA SẺ</b></h2></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <!-- Here begin Main Content -->
+        <div class="col-md-9">
+            <div class="row">
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-6">
+                        <div class="list-event-item">
+                            <div class="box-content-inner clearfix">
+                                <div class="list-event-thumb" style="height: 50%">
+                                    <a href="@Url.Action("Details", new { id = item.Id })">
+                                        @if (item.DocumentURL.Contains(".pdf"))
+                                        {
+                                            <img src="~/images/Document/pdf.png" alt="No Image" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/images/Document/word.png" alt="No Image" />
+                                        }
+                                    </a>
+                                </div>
+                                <div class="list-event-header">
+                                    <span class="event-place small-text"><i class="fa fa-globe"></i>@Html.DisplayFor(model => item.DocumentsCategory.Name)</span>
+
+                                </div>
+                                <h3 class="event-title">@Html.ActionLink(Html.Raw(item.Name).ToString(), "Details", new { id = item.Id })</h3>
+                                @Html.ActionLink("Xem chi tiết", "Details", new { id = item.Id }, htmlAttributes: new { @class = "lightBtn" })
+
+                            </div> <!-- /.box-content-inner -->
+                        </div> <!-- /.list-event-item -->
+
+                    </div> <!-- /.col-md-12 -->
+                }
+            </div> <!-- /.row -->
+            @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+        </div> <!-- /.col-md-8 -->
+        <!-- Here begin Sidebar -->
+        <div class="col-md-3">
+            <div class="widget-main">
+                <div class="widget-main-title">
+                    <h4 class="widget-title">Thể loại</h4>
+                </div>
+                <div class="widget-inner">
+                    <div class="blog-categories">
+                        <div class="row">
+
+                            <div>
+                                <ul class="nav nav-list sf-menu">
+                                    @{
+                                        foreach (var item in listMenu)
+                                        {
+                                            <li style="list-style-type:circle">
+                                                <label>
+                                                    <a href="@Url.Action("Index","UserDocumentItems",new { id = item.Id})">@item.PaMenu</a>
+                                                </label>
+                                                @if (item.ChiMenu.Count() >= 1)
+                                                {
+                                                    <ul>
+                                                        @foreach (var itemChild in item.ChiMenu)
+                                                        {
+                                                            <li>
+                                                                <label>
+                                                                    <a href="@Url.Action("Index","UserDocumentItems",new { id = itemChild.Id})">@itemChild.ChiMenu</a>
+                                                                </label>
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                }
+
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- /.widget-inner -->
+            </div> <!-- /.widget-main -->
+            @*<div class="widget-main">
+                    <div class="widget-main-title">
+                        <h4 class="widget-title">Our Gallery</h4>
+                    </div>
+                    <div class="widget-inner">
+                        <div class="gallery-small-thumbs clearfix">
+                            <div class="thumb-small-gallery">
+                                <a class="fancybox" rel="gallery1" href="./images/gallery/gallery1.jpg" title="Gallery Tittle One">
+                                    <img src="./images/gallery/gallery-small-thumb1.jpg" alt="" />
+                                </a>
+                            </div>
+                            <div class="thumb-small-gallery">
+                                <a class="fancybox" rel="gallery1" href="./images/gallery/gallery2.jpg" title="Gallery Tittle One">
+                                    <img src="./images/gallery/gallery-small-thumb2.jpg" alt="" />
+                                </a>
+                            </div>
+                            <div class="thumb-small-gallery">
+                                <a class="fancybox" rel="gallery1" href="./images/gallery/gallery3.jpg" title="Gallery Tittle One">
+                                    <img src="./images/gallery/gallery-small-thumb3.jpg" alt="" />
+                                </a>
+                            </div>
+                            <div class="thumb-small-gallery">
+                                <a class="fancybox" rel="gallery1" href="./images/gallery/gallery4.jpg" title="Gallery Tittle One">
+                                    <img src="./images/gallery/gallery-small-thumb4.jpg" alt="" />
+                                </a>
+                            </div>
+                            <div class="thumb-small-gallery">
+                                <a class="fancybox" rel="gallery1" href="./images/gallery/gallery5.jpg" title="Gallery Tittle One">
+                                    <img src="./images/gallery/gallery-small-thumb5.jpg" alt="" />
+                                </a>
+                            </div>
+                            <div class="thumb-small-gallery">
+                                <a class="fancybox" rel="gallery1" href="./images/gallery/gallery6.jpg" title="Gallery Tittle One">
+                                    <img src="./images/gallery/gallery-small-thumb6.jpg" alt="" />
+                                </a>
+                            </div>
+                            <div class="thumb-small-gallery">
+                                <a class="fancybox" rel="gallery1" href="./images/gallery/gallery7.jpg" title="Gallery Tittle One">
+                                    <img src="./images/gallery/gallery-small-thumb7.jpg" alt="" />
+                                </a>
+                            </div>
+                            <div class="thumb-small-gallery">
+                                <a class="fancybox" rel="gallery1" href="./images/gallery/gallery8.jpg" title="Gallery Tittle One">
+                                    <img src="./images/gallery/gallery-small-thumb8.jpg" alt="" />
+                                </a>
+                            </div>
+                        </div> <!-- /.galler-small-thumbs -->
+                    </div> <!-- /.widget-inner -->
+                </div>*@ <!-- /.widget-main -->
+        </div> <!-- /.col-md-4 -->
+
+    </div> <!-- /.row -->
+</div> <!-- /.container -->

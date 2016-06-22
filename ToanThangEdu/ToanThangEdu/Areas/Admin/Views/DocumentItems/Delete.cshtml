@@ -1,0 +1,79 @@
+﻿@model ToanThangEdu.Models.DocumentItem
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container form-horizontal">
+    <div class="row">
+
+        <div class="col-lg-10">
+            <div class="widget-item">
+
+
+                <div class="form-horizontal">
+                    <h4 class="text-center">XÓA TÀI LIỆU</h4>
+                    <hr />
+                    <h3>Bạn có muốn xóa tài liệu này?</h3>
+                    <div>                        
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Name)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.DocumentContent)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.DocumentContent)
+                            </dd>
+
+                            <dt>
+
+                            </dt>
+
+                            <dd>
+                                @{
+                                    var str = Model.DocumentURL;
+                                    if (str.Contains(".pdf"))
+                                    {
+                                        <iframe src="@Url.Action("DisplayPDF", "DocumentItems",new {id = Model.Id })" width="100%" height="700" frameborder="0"></iframe>
+                                    }
+                                    else
+                                    {
+                                        <iframe src="https://docs.google.com/gview?embedded=true&url=http://www.daythemdanang.edu.vn/images/Document/@str" width="100%" height="700" frameborder="0"></iframe>
+                                    }
+
+                            <!-- /.blog-post-meta -->}
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.DocumentsCategory.Name)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.DocumentsCategory.Name)
+                            </dd>
+
+                        </dl>
+
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-actions no-color">
+                                <input type="submit" value="Delete" class="btn btn-default" /> |
+                                @Html.ActionLink("Back to List", "Index")
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
